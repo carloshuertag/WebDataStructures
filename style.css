@@ -1,41 +1,30 @@
-:root {
-  --azul0: #001b48;
-  --azul1: #02457a;
-  --azul2: #018abe;
-  --azul3: #97cadb;
-  --azul4: #d6e8ee;
-  --tooltip: rgba(1, 138, 190, 0.9);
+@font-face {
+  font-family: titles_proxima_nova;
+  src: url(font/proxima_ssv/ProximaNova-Regular.otf);
 }
-
-body {
-  width: 100%;
-  background-color: var(--azul4);
+@font-face {
+  font-family: body_proxima_nova;
+  src: url(font/proxima_ssv/Proxima\ Nova\ Alt\ Light.otf);
+}
+body{
+  font-family: body_proxima_nova;
   margin: 0;
-}
-*,body {
-  font-family: Arial, sans-serif;
+  width: 100%;
 }
 h1 {
-  color: white;
-}
-.titulos {
-  text-align: center;
-  background-color: var(--azul1);
-  border-radius: 1rem;
-  box-shadow: 0 9px 19px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.22);
-}
-.tituloIniciales {
-  border-top-left-radius: 0rem;
-  border-top-right-radius: 0rem;
-}
-.tituloIniciales div:last-child {
-  width: 50%;
-}
-.flexBoxHorizontal {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-around;
+  font-family: titles_proxima_nova;
 }
 #sCode, #sCode p {
   font-family: monospace;
+}
+.dsGrid{
+  display: grid;
+  grid-template-columns: auto auto auto;
+}
+nav ul li{
+  display: inline-block;
+  text-align: center;
+  vertical-align: middle;
+  height: 3ex;
+  padding: 2% 5%;
 }

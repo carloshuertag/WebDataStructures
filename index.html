@@ -10,128 +10,132 @@
 
 <body>
   <header>
-    <div class="flexBoxHorizontal titulos tituloIniciales">
-      <div>
-        <h1 id="tituloInfomacion">Data Structures</h1>
-      </div>
-      <div>
-        <h1 id="tituloEquipo">About</h1>
-      </div>
-    </div>
+    <section>
+      <span id="title">Data Structures</span>
+      <span id="aboutTab">About</span>
+    </section>
     <nav>
       <ul>
-        <li>Stack</li>
-        <li>Queue</li>
-        <li>List</li>
+        <li id="stackTab">Stack</li>
+        <li id="queueTab">Queue</li>
+        <li id="listTab">List</li>
       </ul>
     </nav>
   </header>
   <main>
     <section id="about">
-      <h1>Authors:</h1>
-      <h3>Esmeralda Godinez Montero</h3>
-      <h3>Diego David Flores Nogueira</h3>
-      <h3>Carlos Huerta García</h3>
+      <article>
+        <h1>Authors:</h1>
+        <h3>Esmeralda Godinez Montero</h3>
+        <h3>Diego David Flores Nogueira</h3>
+        <h3>Carlos Huerta García</h3>
+      </article>
     </section>
-
     <section id="stack">
-      <article id="s-options">
-        <button id="newStack">New Stack</button>
-        <span class="buttonSpace"></span>
-        <button id="saveStack">Save Stack</button>
-        <span class="buttonSpace"></span>
-        <button id="loadStack">Load Stack</button>
-        <br /><br />
-        <form>
-          <label for="sElement">Element:</label>
-          <input id="sElement" name="sElement" type="number" required />
-          <button type="button" id="push">Push</button>
-        </form>
-        <br /><br />
-        <button id="pop">Pop</button>
-      </article>
-      <article id="sAnimation">
-        <table>
-          <tbody id="stackAnimation"></tbody>
-        </table>
-      </article>
-      <article id="sCode">
-        #include &lt;stdlib.h&gt; <br />
-        #include &lt;stdbool.h&gt;<br />
-        #include &lt;limits.h&gt; <br />
-        #include &lt;stdio.h&gt; <br />
-        typedef int iStackEntry; <br />
-        typedef struct iStackElement { <br />
-        StackEntry entry; <br />
-        struct iStackElement* next; <br />
-        } iStackElement; <br />
+      <section class="dsGrid">
+        <article id="sOptions">
+          <button id="newStack">New Stack</button>
+          <span class="buttonSpace"></span>
+          <button id="saveStack">Save Stack</button>
+          <span class="buttonSpace"></span>
+          <button id="loadStack">Load Stack</button>
+          <br /><br />
+          <form>
+            <label for="sElement">Element:</label>
+            <input id="sElement" name="sElement" type="number" required />
+            <button type="button" id="push">Push</button>
+          </form>
+          <br /><br />
+          <button id="pop">Pop</button>
+        </article>
+        <article id="sAnimation">
+          <table>
+            <tbody id="stackAnimation"></tbody>
+          </table>
+        </article>
+        <article id="sCode">
+          #include &lt;stdlib.h&gt; <br />
+          #include &lt;stdbool.h&gt;<br />
+          #include &lt;limits.h&gt; <br />
+          #include &lt;stdio.h&gt; <br />
+          typedef int iStackEntry; <br />
+          typedef struct iStackElement { <br />
+          StackEntry entry; <br />
+          struct iStackElement* next; <br />
+          } iStackElement; <br />
 
-        typedef struct iStack { <br />
-        iStackElement* top; <br />
-        } iStack; <br />
-        <article id="createStack">
-          <p>iStack* createiStack() {</p>
+          typedef struct iStack { <br />
+          iStackElement* top; <br />
+          } iStack; <br />
+          <article id="createStack">
+            <p>iStack* createiStack() {</p>
             <p>iStack* stack = (iStack*)malloc(sizeof(iStack));</p>
             <p>stack->top = NULL;</p>
             <p>return stack;</p>
             <p>}</p>
+          </article>
+          <article id="pushCode">
+            <p>void pushi(iStackEntry item, iStack* stack) {</p>
+            <p>iStackElement* element = createiElement(item);</p>
+            <p>element->next = stack->top;</p>
+            <p>stack->top = element;</p>
+            <p>}</p>
+          </article><br />
+          <article id="popCode">
+            <p>iStackEntry popi(iStack* stack) {</p>
+            <p>iStackEntry popped = INT_MIN;</p>
+            <p>if (isiEmpty(stack)) {</p>
+            <p>puts("Error: current stack is empty");</p>
+            <p>return popped;</p>
+            <p>}</p>
+            <p>iStackElement* temp = stack->top;</p>
+            <p>stack->top = stack->top->next;</p>
+            <p>popped = temp->entry;</p>
+            <p>free(temp);</p>
+            <p>return popped;</p>
+            <p>}</p>
+          </article>
         </article>
-        <article id="pushCode">
-          <p>void pushi(iStackEntry item, iStack* stack) {</p>
-          <p>iStackElement* element = createiElement(item);</p>
-          <p>element->next = stack->top;</p>
-          <p>stack->top = element;</p>
-          <p>}</p>
-        </article><br />
-        <article id="popCode">
-          <p>iStackEntry popi(iStack* stack) {</p>
-          <p>iStackEntry popped = INT_MIN;</p>
-          <p>if (isiEmpty(stack)) {</p>
-          <p>puts("Error: current stack is empty");</p>
-          <p>return popped;</p>
-          <p>}</p>
-          <p>iStackElement* temp = stack->top;</p>
-          <p>stack->top = stack->top->next;</p>
-          <p>popped = temp->entry;</p>
-          <p>free(temp);</p>
-          <p>return popped;</p>
-          <p>}</p>
-        </article>
-      </article>
+      </section>
     </section>
-
     <section id="queue">
-      <article id="qOptions">
-        <button id="newQueue">New Queue</button>
-        <span class="buttonSpace"></span>
-        <button id="loadQueue">Load Queue</button>
-        <br /><br />
-        <form>
-          <label for="sElement">Element:</label>
-          <input id="sElement" name="sElement" type="number" required />
-          <button id="enqueue">Enqueue</button>
-        </form>
-        <br /><br />
-        <button id="dequeue">Dequeue</button>
-      </article>
-      <article id="qAnimation">
-
-      </article>
-      <article id="qCode">
-
-      </article>
+      <section class="dsGrid">
+        <article id="qOptions">
+          <button id="newQueue">New Queue</button>
+          <span class="buttonSpace"></span>
+          <button id="saveQueue">Save Queue</button>
+          <span class="buttonSpace"></span>
+          <button id="loadQueue">Load Queue</button>
+          <br /><br />
+          <form>
+            <label for="qElement">Element:</label>
+            <input id="qElement" name="qElement" type="number" required />
+            <button type="button" id="enqueue">Enqueue</button>
+          </form>
+          <br /><br />
+          <button id="dequeue">Dequeue</button>
+        </article>
+        <article id="qAnimation">
+          <table>
+            <tbody id="queueAnimation"></tbody>
+          </table>
+        </article>
+        <article id="qCode">
+        </article>
+      </section>
     </section>
-
     <section id="list">
-      <article id="lOptions">
+      <section class = "dsGrid">
+        <article id="lOptions">
 
-      </article>
-      <article id="lAnimation">
+        </article>
+        <article id="lAnimation">
 
-      </article>
-      <article id="lCode">
+        </article>
+        <article id="lCode">
 
-      </article>
+        </article>
+      </section>
     </section>
   </main>
 </body>
