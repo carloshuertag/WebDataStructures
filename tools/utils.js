@@ -250,7 +250,9 @@ function setCookie(sArray, qArray, lArray, exdays) {
     var d = new Date();
     d.setTime(d.getTime() + (exdays * 24 * 60 * 60 * 1000));
     var expires = "expires=" + d.toUTCString();
-    document.cookie = "queueArray=" + qArray.toString() + ";" + "stackArray=" + sArray.toString() + ";" + "listArray=" + lArray.toString() + ";" + expires + ";path=/";
+    document.cookie = "queueArray=" + qArray.toString() + ";" + expires + ";path=/";
+    document.cookie = "stackArray=" + sArray.toString() + ";" + expires + ";path=/";
+    document.cookie = + "listArray=" + lArray.toString() + ";" + expires + ";path=/";
 }
 
 function getCookie(cname) {
