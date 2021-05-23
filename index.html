@@ -16,7 +16,7 @@
       <span id="darkMode">
         <label for="dark">Dark Mode<span class="buttonSpace"></span></label>
         <label class="switch">
-          <input id = "dark" type="checkbox" checked>
+          <input id="dark" type="checkbox" checked>
           <span class="slider round"></span>
         </label>
       </span>
@@ -35,7 +35,7 @@
       <article>
         <h1>Description</h1>
         <p>Displays the stacks, queues and singly linked lists behavior.</p>
-        <p>Powered by CSS, JS and HTML with no framworks</p>
+        <p>Powered by CSS, JS and HTML with no frameworks.</p>
         <h1>Authors:</h1>
         <h4>Esmeralda Godinez Montero</h4>
         <h4>Diego David Flores Nogueira</h4>
@@ -45,26 +45,26 @@
     <section id="stack">
       <section class="dsGrid">
         <article id="sOptions">
-          <button id="newStack"><span><img src="icons/new.svg"/></span>New Stack</button>
+          <button id="newStack"><span><img src="icons/new.svg" /></span>New Stack</button>
           <span class="buttonSpace"></span>
-          <button id="saveStack"><img src="icons/save.svg"/>Save Stack</button>
+          <button id="saveStack"><img src="icons/save.svg" />Save Stack</button>
           <span class="buttonSpace"></span>
-          <button id="loadStack"><img src="icons/load.svg"/>Load Stack</button>
+          <button id="loadStack"><img src="icons/load.svg" />Load Stack</button>
           <br /><br />
           <form>
             <label for="sElement">Element:</label>
             <input id="sElement" name="sElement" type="number" size="8" required />
-            <button type="button" id="push"><img src="icons/add.svg"/>Push</button>
+            <button type="button" id="push"><img src="icons/add.svg" />Push</button>
           </form>
           <br /><br />
-          <button id="pop"><img src="icons/remove.svg"/>Pop</button>
+          <button id="pop"><img src="icons/remove.svg" />Pop</button>
         </article>
         <article id="sAnimation">
           <table>
             <thead>
-              <th>
-              <td id="sHead">head</td>
-              </th>
+              <tr>
+                <th id="sHead">head</th>
+              </tr>
             </thead>
             <tbody id="stackAnimation"></tbody>
             <tfoot>
@@ -81,40 +81,39 @@
           #include &lt;stdio.h&gt; <br />
           typedef int iStackEntry; <br />
           typedef struct iStackElement { <br />
-          StackEntry entry; <br />
-          struct iStackElement* next; <br />
+            &nbsp;StackEntry entry; <br />
+            &nbsp;struct iStackElement* next; <br />
           } iStackElement; <br />
-
-          typedef struct iStack { <br />
-          iStackElement* top; <br />
-          } iStack; <br />
+            &nbsp;typedef struct iStack { <br />
+            &nbsp;iStackElement* top; <br />
+          } iStack; <br /><br/>
           <article id="createStack">
-            <p>iStack* createiStack() {</p>
-            <p>iStack* stack = (iStack*)malloc(sizeof(iStack));</p>
-            <p>stack->top = NULL;</p>
-            <p>return stack;</p>
-            <p>}</p>
-          </article>
+            iStack* createiStack() {<br/>
+              &nbsp;iStack* stack = (iStack*)malloc(sizeof(iStack));<br/>
+              &nbsp;stack->top = NULL;<br/>
+              &nbsp;return stack;<br/>
+            }<br/>
+          </article><br/>
           <article id="pushCode">
-            <p>void pushi(iStackEntry item, iStack* stack) {</p>
-            <p>iStackElement* element = createiElement(item);</p>
-            <p>element->next = stack->top;</p>
-            <p>stack->top = element;</p>
-            <p>}</p>
+            void pushi(iStackEntry item, iStack* stack) {<br/>
+              &nbsp;iStackElement* element = createiElement(item);<br/>
+              &nbsp;element->next = stack->top;<br/>
+              &nbsp;stack->top = element;<br/>
+            }<br/>
           </article><br />
           <article id="popCode">
-            <p>iStackEntry popi(iStack* stack) {</p>
-            <p>iStackEntry popped = INT_MIN;</p>
-            <p>if (isiEmpty(stack)) {</p>
-            <p>puts("Error: current stack is empty");</p>
-            <p>return popped;</p>
-            <p>}</p>
-            <p>iStackElement* temp = stack->top;</p>
-            <p>stack->top = stack->top->next;</p>
-            <p>popped = temp->entry;</p>
-            <p>free(temp);</p>
-            <p>return popped;</p>
-            <p>}</p>
+            iStackEntry popi(iStack* stack) {<br/>
+              &nbsp;iStackEntry popped = INT_MIN;<br/>
+              &nbsp;if (isiEmpty(stack)) {<br/>
+              &nbsp;puts("Error: current stack is empty");<br/>
+              &nbsp;return popped;<br/>
+            }<br/>
+            iStackElement* temp = stack->top;<br/>
+              &nbsp;stack->top = stack->top->next;<br/>
+              &nbsp;popped = temp->entry;<br/>
+              &nbsp;free(temp);<br/>
+              &nbsp;return popped;<br/>
+            }<br/>
           </article>
         </article>
       </section>
@@ -122,19 +121,19 @@
     <section id="queue">
       <section class="dsGrid">
         <article id="qOptions">
-          <button id="newQueue">New Queue</button>
+          <button id="newQueue"><img src="icons/load.svg" />New Queue</button>
           <span class="buttonSpace"></span>
-          <button id="saveQueue">Save Queue</button>
+          <button id="saveQueue"><img src="icons/save.svg" />Save Queue</button>
           <span class="buttonSpace"></span>
-          <button id="loadQueue">Load Queue</button>
+          <button id="loadQueue"><img src="icons/load.svg" />Load Queue</button>
           <br /><br />
           <form>
             <label for="qElement">Element:</label>
             <input id="qElement" name="qElement" type="number" size="8" required />
-            <button type="button" id="enqueue">Enqueue</button>
+            <button type="button" id="enqueue"><img src="icons/add.svg" />Enqueue</button>
           </form>
           <br /><br />
-          <button id="dequeue">Dequeue</button>
+          <button id="dequeue"><img src="icons/remove.svg" />Dequeue</button>
         </article>
         <article id="qAnimation">
           <table>

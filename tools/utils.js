@@ -47,7 +47,6 @@ function loadStack() {
         for (let i = 0; i < stackArray.length; i++) {
             row = document.createElement("tr");
             value = document.createTextNode(stackArray[stackArray.length - (i + 1)]);
-            if (i === 0) row.style.backgroundColor = "rgba(0, 255, 127, 0.6)";
             if (i != 0) {
                 //Arrow 
                 arrow = document.createElement("tr");
@@ -60,10 +59,13 @@ function loadStack() {
             stack.appendChild(row);
             data = document.createElement("td");
             data.appendChild(value);
+            data.className = "stackElement";
             row.appendChild(data);
+            if (i === 0) row.firstChild.className = "stackHead";
         }
         document.getElementById("sHead").style.display = "block";
         document.getElementById("sTail").style.display = "block";
+        alert("Stack previously stored loaaded successfully");
     }
 }
 
@@ -75,32 +77,34 @@ function saveStack() {
     let lArray = getCookie("listArray");
     if (lArray != "") lAux = lArray.split(",");
     setCookie(stackArray, qAux, lAux, 1);
-    alert("Stack saved succesfully");
+    alert("Stack saved successfully");
 }
 
 function push() {
     let value = document.getElementById("sElement").value;
+    if(value == "") {
+        alert("Please enter the data to push into the stack.");
+        return;
+    }
     let row = document.createElement("tr");
     let head = stack.firstChild;
     let data = document.createElement("td");
     if (!stack.hasChildNodes()) stack.appendChild(row);
     else {
         let arrow = document.createElement("tr");
-        head.style.backgroundColor = "white";
         stack.insertBefore(arrow, head);
         stack.insertBefore(row, arrow);
         let arrowData = document.createElement("td");
         let arrowText = document.createTextNode("↓");
         arrowData.appendChild(arrowText);
         arrow.appendChild(arrowData);
-
+        head.firstChild.className = "stackElement";
     }
-    //data.className = "stackElement";
     let text = document.createTextNode(value);
+    data.className = "stackHead";
     data.appendChild(text);
     row.appendChild(data);
     stackArray.push(value);
-    row.style.backgroundColor = "rgba(0, 255, 127, 0.6)";
     document.getElementById("sHead").style.display = "block";
     document.getElementById("sTail").style.display = "block";
 }
@@ -111,7 +115,7 @@ function pop() {
     if (!stack.hasChildNodes()) {
         document.getElementById("sHead").style.display = "none";
         document.getElementById("sTail").style.display = "none";
-    }
+    } else stack.firstChild.firstChild.className = "stackHead";
     stackArray.pop();
 }
 
@@ -148,7 +152,7 @@ function enqueue() {
         row.appendChild(element);
         row.appendChild(tail);
     }
-    //data.className = "queueElement";
+    element.className = "queueElement";
     let text = document.createTextNode(value);
     element.appendChild(text);
     queueArray.push(value);
@@ -202,6 +206,7 @@ function loadQueue() {
             value = document.createTextNode(queueArray[i]);
             //agregar el nodo (una columna)
             data = document.createElement("td");
+            data.className = "queueElement";
             row.appendChild(data);
             data.appendChild(value);
             //si i es el ultimo elemento, no se imprime la flecha solo el nodo 
@@ -219,6 +224,7 @@ function loadQueue() {
                 row.appendChild(tail);
             }
         }
+        alert("Queue previously stored loaaded successfully");
     }
 }
 

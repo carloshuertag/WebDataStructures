@@ -21,6 +21,22 @@ header span, nav li {
   padding: 3%;
 }
 
+.stackElement, .queueElement{
+  border: 0.3ex solid rgba(0, 0, 0, 0.5);
+  background: #A9F5F2;
+  color: #2E2E2E ;
+  text-align: center;
+  padding: 1ex 1ex;
+}
+
+.stackHead {
+  border: 0.3ex solid rgba(0, 0, 0, 0.5);
+  background: rgba(0, 255, 127, 0.6);
+  color: #2E2E2E ;
+  text-align: center;
+  padding: 1ex 1ex;
+}
+
 #title {
   grid-column: 1 / 5;
   font-size: xx-large;
@@ -34,6 +50,7 @@ header span, nav li {
 
 nav ul li:hover {
   background-color: rgba(32, 32, 32, 0.2) ;
+  cursor: pointer;
 }
 
 #about , header > section{
@@ -55,7 +72,7 @@ nav ul li:hover {
 
 #sCode, #qCode, #lCode {
   overflow: scroll;
-  max-height: 85vh;
+  max-height: 82vh;
   -ms-overflow-style: none;
   scrollbar-width: none;
 }
@@ -103,7 +120,7 @@ nav ul li{
   display: inline-block;
 }
 
-#newStack, #saveStack, #loadStack, #push, #pop {
+#newStack, #saveStack, #loadStack, #push, #pop, #newQueue, #saveQueue, #loadQueue, #enqueue, #dequeue {
   border: 0ex;
   background: #A9F5F2;
   color: #2E2E2E ;
@@ -111,16 +128,19 @@ nav ul li{
   text-align: center;
   border-radius: 3ex;
   padding: 2ex 1.5ex;
+  -webkit-transition-duration: 0.4s;
+  transition-duration: 0.4s;
+  text-decoration: none;
+  overflow: hidden;
 }
 
-#newStack img, #saveStack img, #loadStack img, #push img, #pop img {
+#newStack img, #saveStack img, #loadStack img, #push img, #pop img, #newQueue img, #saveQueue img, #loadQueue img, #enqueue img, #dequeue img {
   width: 2.2ex;
   height: 2.2ex;
   padding-right: 1ex;
 }
 
-#newStack:hover, #saveStack:hover, #loadStack:hover, #push:hover, #pop:hover {
-  border: 0.3ex solid rgba(0, 0, 0, 0.5);
+#newStack:hover, #saveStack:hover, #loadStack:hover, #push:hover, #pop:hover, #newQueue:hover, #saveQueue:hover, #loadQueue:hover, #enqueue:hover, #dequeue:hover {
   color:  rgba(0, 0, 0, 0.6);
 }
 
