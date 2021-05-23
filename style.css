@@ -21,14 +21,14 @@ header span, nav li {
 }
 
 #aboutTab {
-
+  background-color: rgba(16, 16, 16, 0.2) ;
 }
 
 #aboutTab, nav ul li {
   font-size: larger;
 }
 
-#aboutTab, #aboutTab:hover, nav ul li:hover {
+#aboutTab:hover, nav ul li:hover {
   background-color: rgba(32, 32, 32, 0.2) ;
 }
 
@@ -48,10 +48,18 @@ header span, nav li {
   font-family: monospace;
   text-align: left;
 }
+
 #sCode, #qCode, #lCode {
   overflow: scroll;
   max-height: 85vh;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
 }
+
+#sCode::-webkit-scrollbar, #qCode::-webkit-scrollbar, #lCode::-webkit-scrollbar {
+  display: none;
+}
+
 #stack, #queue, #list {
   display: none;
 }
