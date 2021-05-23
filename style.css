@@ -20,8 +20,16 @@ header span, nav li {
   font-size: x-large;
 }
 
+#aboutTab {
+
+}
+
 #aboutTab, nav ul li {
   font-size: larger;
+}
+
+#aboutTab, #aboutTab:hover, nav ul li:hover {
+  background-color: rgba(32, 32, 32, 0.2) ;
 }
 
 #about {
@@ -35,8 +43,14 @@ header span, nav li {
   grid-column: 2 / 5;
 }
 
-#sCode, #sCode p {
+#sCode, #sCode p, #qCode, #qCode  p, #lCode, #lCode p {
+  padding-left: 3%;
   font-family: monospace;
+  text-align: left;
+}
+#sCode, #qCode, #lCode {
+  overflow: scroll;
+  max-height: 85vh;
 }
 #stack, #queue, #list {
   display: none;
