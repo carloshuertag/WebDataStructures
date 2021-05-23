@@ -34,28 +34,28 @@ function loadPage() {
 function showTabs(i) {
     switch(i) {
         case 1:
-            document.getElementById("about").display = "none";
-            document.getElementById("stack").display = "block";
-            document.getElementById("queue").display = "none";
-            document.getElementById("list").display = "none";
+            document.getElementById("about").style.display = "none";
+            document.getElementById("stack").style.display = "block";
+            document.getElementById("queue").style.display = "none";
+            document.getElementById("list").style.display = "none";
             break;
         case 2:
-            document.getElementById("about").display = "none";
-            document.getElementById("stack").display = "none";
-            document.getElementById("queue").display = "block";
-            document.getElementById("list").display = "none";
+            document.getElementById("about").style.display = "none";
+            document.getElementById("stack").style.display = "none";
+            document.getElementById("queue").style.display = "block";
+            document.getElementById("list").style.display = "none";
             break;
         case 3:
-            document.getElementById("about").display = "none";
-            document.getElementById("stack").display = "none";
-            document.getElementById("queue").display = "none";
-            document.getElementById("list").display = "block";
+            document.getElementById("about").style.display = "none";
+            document.getElementById("stack").style.display = "none";
+            document.getElementById("queue").style.display = "none";
+            document.getElementById("list").style.display = "block";
             break;
         default:
-            document.getElementById("about").display = "block";
-            document.getElementById("stack").display = "none";
-            document.getElementById("queue").display = "none";
-            document.getElementById("list").display = "none";
+            document.getElementById("about").style.display = "block";
+            document.getElementById("stack").style.display = "none";
+            document.getElementById("queue").style.display = "none";
+            document.getElementById("list").style.display = "none";
             break;
     }
 }
@@ -65,6 +65,8 @@ function showTabs(i) {
 function newStack() {
     while(stack.hasChildNodes()) stack.removeChild(stack.firstChild);
     stackArray = new Array();
+    document.getElementById("sHead").style.display = "none";
+    document.getElementById("sTail").style.display = "none";
 }
 
 function loadStack() {
@@ -79,6 +81,7 @@ function loadStack() {
         for (let i = 0; i < stackArray.length; i++) {
             row = document.createElement("tr");
             value = document.createTextNode(stackArray[stackArray.length-(i+1)]);
+            if(i === 0) row.style.backgroundColor = "greenyellow";
             if(i != 0){
                 //Arrow 
                 arrow = document.createElement("tr");
@@ -93,6 +96,8 @@ function loadStack() {
             data.appendChild(value);
             row.appendChild(data);
         }
+        document.getElementById("sHead").style.display = "block";
+        document.getElementById("sTail").style.display = "block";
     }
 }
 
@@ -110,28 +115,37 @@ function saveStack(){
 function push() {
     let value = document.getElementById("sElement").value;
     let row = document.createElement("tr");
-    let arrow = document.createElement("tr");
     let head = stack.firstChild;
-    if (!stack.hasChildNodes()) stack.appendChild(row)
+    let data = document.createElement("td");
+    if (!stack.hasChildNodes()) stack.appendChild(row);
     else {
+        let arrow = document.createElement("tr");
+        head.style.backgroundColor = "white";
         stack.insertBefore(arrow, head);
         stack.insertBefore(row, arrow);
         let arrowData = document.createElement("td");
         let arrowText = document.createTextNode("↓");
         arrowData.appendChild(arrowText);
         arrow.appendChild(arrowData);
+
     }
-    let data = document.createElement("td");
     //data.className = "stackElement";
     let text = document.createTextNode(value);
     data.appendChild(text);
     row.appendChild(data);
     stackArray.push(value);
+    row.style.backgroundColor = "greenyellow";
+    document.getElementById("sHead").style.display = "block";
+    document.getElementById("sTail").style.display = "block";
 }
 
 function pop() {
     if (stack.hasChildNodes()) stack.removeChild(stack.firstChild);
     if (stack.hasChildNodes()) stack.removeChild(stack.firstChild);
+    if (!stack.hasChildNodes()) {
+        document.getElementById("sHead").style.display = "none";
+        document.getElementById("sTail").style.display = "none";
+    }
     stackArray.pop();
 }
 
@@ -142,10 +156,15 @@ function enqueue() {
     let row;
     let element = document.createElement("td");
     let arrow = document.createElement("td");
+    let head = document.createElement("td");
     if (!queue.hasChildNodes()){
         row = document.createElement("tr");
         queue.appendChild(row);
+        row.appendChild(head);
         row.appendChild(element);
+        let headtext = document.createTextNode("head");
+        head.style.color = "red";
+        head.appendChild(headtext);
     }
     else {
         row = queue.firstChild;
@@ -185,32 +204,33 @@ function loadQueue() {
     else {
         //Delete any queue
         if(queue.hasChildNodes()) queue.removeChild(queue.firstChild);
-        console.log("deleted")
         //Print the queue
-        let row, value, arrow, arrowText, arrowData, data;
+        let row, value, arrow, arrowText, data;
+        let head = document.createElement("td");
         //Se crea la fila (solo habra una)
         row = document.createElement("tr");
         queue.appendChild(row);
         for (let i = 0; i < queueArray.length; i++) {
+            if(i === 0) {
+                row.appendChild(head);
+                let headtext = document.createTextNode("head");
+                head.style.color = "red";
+                head.appendChild(headtext);
+            }
             value = document.createTextNode(queueArray[i]);
             //agregar el nodo (una columna)
             data = document.createElement("td");
             row.appendChild(data);
             data.appendChild(value);
-            //let arrow = document.createElement("td");
             //si i es el ultimo elemento, no se imprime la flecha solo el nodo 
             if(i != (queueArray.length-1)){
                 //Arrow 
                 arrow = document.createElement("td");
                 row.appendChild(arrow);
-                //arrowData = document.createElement("td");
                 arrowText = document.createTextNode("→");
-                //arrowData.appendChild(arrowText);
                 arrow.appendChild(arrowText);  
             } 
-        }
-        console.log("added");
-        
+        }        
     }
 }
 

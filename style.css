@@ -17,6 +17,9 @@ h1 {
 #sCode, #sCode p {
   font-family: monospace;
 }
+#stack, #queue, #list {
+  display: none;
+}
 .dsGrid{
   display: grid;
   grid-template-columns: auto auto auto;
@@ -27,4 +30,8 @@ nav ul li{
   vertical-align: middle;
   height: 3ex;
   padding: 2% 5%;
+}
+#sTail, #sHead{
+  display: none;
+  color:red;
 }
