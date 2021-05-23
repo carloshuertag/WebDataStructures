@@ -20,6 +20,10 @@
   background: #A9F5F2;
   color:  #2E2E2E;
 }
+.btnImage{
+  background-color: #2E2E2E;
+  
+}
 body{
   font-family: body_proxima_nova;
   margin: 0;
