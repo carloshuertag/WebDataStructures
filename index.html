@@ -2,10 +2,11 @@
 <html lang="en" dir="ltr">
 
 <head>
-  <meta charset="utf-8">
-  <title>Visualización de Estructuras de Datos</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>Data Structures</title>
   <link rel="stylesheet" href="style.css" />
   <script src="tools/utils.js" type="text/javascript"></script>
+  <script src="tools/index.js" type="text/javascript"></script>
 </head>
 
 <body>
@@ -13,6 +14,13 @@
     <section>
       <span id="title">Data Structures</span>
       <span id="aboutTab">About</span>
+      <span id="darkMode">
+        <label for="dark">Dark Mode<span class="buttonSpace"></span></label>
+        <label class="switch">
+          <input id = "dark" type="checkbox" checked>
+          <span class="slider round"></span>
+        </label>
+      </span>
     </section>
     <nav>
       <ul>
@@ -25,10 +33,13 @@
   <main>
     <section id="about">
       <article>
+        <h1>Description</h1>
+        <p>Displays the stacks, queues and singly linked lists behavior.</p>
+        <p>Powered by CSS, JS and HTML with no framworks</p>
         <h1>Authors:</h1>
-        <h3>Esmeralda Godinez Montero</h3>
-        <h3>Diego David Flores Nogueira</h3>
-        <h3>Carlos Huerta García</h3>
+        <h4>Esmeralda Godinez Montero</h4>
+        <h4>Diego David Flores Nogueira</h4>
+        <h4>Carlos Huerta García</h4>
       </article>
     </section>
     <section id="stack">
@@ -42,7 +53,7 @@
           <br /><br />
           <form>
             <label for="sElement">Element:</label>
-            <input id="sElement" name="sElement" type="number" required />
+            <input id="sElement" name="sElement" type="number" size="8" required />
             <button type="button" id="push">Push</button>
           </form>
           <br /><br />
@@ -52,7 +63,7 @@
           <table>
             <thead>
               <th>
-                <td id="sHead">head</td>
+              <td id="sHead">head</td>
               </th>
             </thead>
             <tbody id="stackAnimation"></tbody>
@@ -119,7 +130,7 @@
           <br /><br />
           <form>
             <label for="qElement">Element:</label>
-            <input id="qElement" name="qElement" type="number" required />
+            <input id="qElement" name="qElement" type="number" size="8" required />
             <button type="button" id="enqueue">Enqueue</button>
           </form>
           <br /><br />
@@ -135,7 +146,7 @@
       </section>
     </section>
     <section id="list">
-      <section class = "dsGrid">
+      <section class="dsGrid">
         <article id="lOptions">
 
         </article>

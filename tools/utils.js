@@ -6,11 +6,6 @@ let listArray = new Array();
 window.addEventListener("load", loadPage, false);
 function loadPage() {
     //Events
-    //Tabs
-    document.getElementById("aboutTab").addEventListener("click", function () { showTabs(0); });
-    document.getElementById("stackTab").addEventListener("click", function () { showTabs(1); });
-    document.getElementById("queueTab").addEventListener("click", function () { showTabs(2); });
-    document.getElementById("listTab").addEventListener("click", function () { showTabs(3); });
     //Stack
     document.getElementById("pop").addEventListener("click", pop, false);
     document.getElementById("push").addEventListener("click", push, false);
@@ -29,35 +24,6 @@ function loadPage() {
     stack = document.getElementById("stackAnimation");
     queue = document.getElementById("queueAnimation");
     list = document.getElementById("listAnimation");
-}
-
-function showTabs(i) {
-    switch (i) {
-        case 1:
-            document.getElementById("about").style.display = "none";
-            document.getElementById("stack").style.display = "block";
-            document.getElementById("queue").style.display = "none";
-            document.getElementById("list").style.display = "none";
-            break;
-        case 2:
-            document.getElementById("about").style.display = "none";
-            document.getElementById("stack").style.display = "none";
-            document.getElementById("queue").style.display = "block";
-            document.getElementById("list").style.display = "none";
-            break;
-        case 3:
-            document.getElementById("about").style.display = "none";
-            document.getElementById("stack").style.display = "none";
-            document.getElementById("queue").style.display = "none";
-            document.getElementById("list").style.display = "block";
-            break;
-        default:
-            document.getElementById("about").style.display = "block";
-            document.getElementById("stack").style.display = "none";
-            document.getElementById("queue").style.display = "none";
-            document.getElementById("list").style.display = "none";
-            break;
-    }
 }
 
 //Stack
@@ -81,7 +47,7 @@ function loadStack() {
         for (let i = 0; i < stackArray.length; i++) {
             row = document.createElement("tr");
             value = document.createTextNode(stackArray[stackArray.length - (i + 1)]);
-            if (i === 0) row.style.backgroundColor = "greenyellow";
+            if (i === 0) row.style.backgroundColor = "rgba(0, 255, 127, 0.6)";
             if (i != 0) {
                 //Arrow 
                 arrow = document.createElement("tr");
@@ -134,7 +100,7 @@ function push() {
     data.appendChild(text);
     row.appendChild(data);
     stackArray.push(value);
-    row.style.backgroundColor = "greenyellow";
+    row.style.backgroundColor = "rgba(0, 255, 127, 0.6)";
     document.getElementById("sHead").style.display = "block";
     document.getElementById("sTail").style.display = "block";
 }
@@ -159,14 +125,14 @@ function enqueue() {
     let tail = document.createElement("td");
     let tailText = document.createTextNode("tail");
     tail.appendChild(tailText);
-    tail.style.color = "red";
+    tail.style.color = "#FA5858";
     if (!queue.hasChildNodes()) {
         row = document.createElement("tr");
         queue.appendChild(row);
         let head = document.createElement("td");
         let headtext = document.createTextNode("head");
         head.appendChild(headtext);
-        head.style.color = "red";
+        head.style.color = "#FA5858";
         row.appendChild(head);
         row.appendChild(element);
         row.appendChild(tail);
@@ -193,7 +159,7 @@ function dequeue() {
         let head = document.createElement("td");
         let headtext = document.createTextNode("head");
         head.appendChild(headtext);
-        head.style.color = "red";
+        head.style.color = "#FA5858";
         let row = queue.firstChild;
         if (row.hasChildNodes()) row.removeChild(row.firstChild);
         if (row.hasChildNodes()) row.removeChild(row.firstChild);
@@ -230,7 +196,7 @@ function loadQueue() {
                 let head = document.createElement("td");
                 row.appendChild(head);
                 let headtext = document.createTextNode("head");
-                head.style.color = "red";
+                head.style.color = "#FA5858";
                 head.appendChild(headtext);
             }
             value = document.createTextNode(queueArray[i]);
@@ -249,7 +215,7 @@ function loadQueue() {
                 let tail = document.createElement("td");
                 let tailText = document.createTextNode("tail");
                 tail.appendChild(tailText);
-                tail.style.color = "red";
+                tail.style.color = "#FA5858";
                 row.appendChild(tail);
             }
         }
