@@ -103,6 +103,27 @@ nav ul li{
   display: inline-block;
 }
 
+#newStack, #saveStack, #loadStack, #push, #pop {
+  border: 0ex;
+  background: #A9F5F2;
+  color: #2E2E2E ;
+  cursor: pointer;
+  text-align: center;
+  border-radius: 3ex;
+  padding: 2ex 1.5ex;
+}
+
+#newStack img, #saveStack img, #loadStack img, #push img, #pop img {
+  width: 3ex;
+  height: 3ex;
+  padding-right: 1ex;
+}
+
+#newStack:hover, #saveStack:hover, #loadStack:hover, #push:hover, #pop:hover {
+  border: 0.3ex solid rgba(0, 0, 0, 0.5);
+  color:  rgba(0, 0, 0, 0.6);
+}
+
 .switch {
   position: relative;
   display: inline-block;
