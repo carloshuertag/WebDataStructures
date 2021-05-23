@@ -7,10 +7,10 @@ window.addEventListener("load", loadPage, false);
 function loadPage() {
     //Events
     //Tabs
-    document.getElementById("aboutTab").addEventListener("click", function() { showTabs(0); });
-    document.getElementById("stackTab").addEventListener("click", function() { showTabs(1); });
-    document.getElementById("queueTab").addEventListener("click", function() { showTabs(2); });
-    document.getElementById("listTab").addEventListener("click", function() { showTabs(3); });
+    document.getElementById("aboutTab").addEventListener("click", function () { showTabs(0); });
+    document.getElementById("stackTab").addEventListener("click", function () { showTabs(1); });
+    document.getElementById("queueTab").addEventListener("click", function () { showTabs(2); });
+    document.getElementById("listTab").addEventListener("click", function () { showTabs(3); });
     //Stack
     document.getElementById("pop").addEventListener("click", pop, false);
     document.getElementById("push").addEventListener("click", push, false);
@@ -24,7 +24,7 @@ function loadPage() {
     document.getElementById("saveQueue").addEventListener("click", saveQueue, false);
     document.getElementById("loadQueue").addEventListener("click", loadQueue, false);
     //list
-    
+
     //Objets
     stack = document.getElementById("stackAnimation");
     queue = document.getElementById("queueAnimation");
@@ -32,7 +32,7 @@ function loadPage() {
 }
 
 function showTabs(i) {
-    switch(i) {
+    switch (i) {
         case 1:
             document.getElementById("about").style.display = "none";
             document.getElementById("stack").style.display = "block";
@@ -63,7 +63,7 @@ function showTabs(i) {
 //Stack
 
 function newStack() {
-    while(stack.hasChildNodes()) stack.removeChild(stack.firstChild);
+    while (stack.hasChildNodes()) stack.removeChild(stack.firstChild);
     stackArray = new Array();
     document.getElementById("sHead").style.display = "none";
     document.getElementById("sTail").style.display = "none";
@@ -71,25 +71,25 @@ function newStack() {
 
 function loadStack() {
     let sArray = getCookie("stackArray");
-    if(sArray != "") stackArray = sArray.split(",");
-    if(stackArray.length == 0) alert("No stack stored");
+    if (sArray != "") stackArray = sArray.split(",");
+    if (stackArray.length == 0) alert("No stack stored");
     else {
         //Delete any stack 
-        while(stack.hasChildNodes()) stack.removeChild(stack.firstChild);
+        while (stack.hasChildNodes()) stack.removeChild(stack.firstChild);
         //Print the stack
         let row, value, arrow, arrowText, arrowData, data;
         for (let i = 0; i < stackArray.length; i++) {
             row = document.createElement("tr");
-            value = document.createTextNode(stackArray[stackArray.length-(i+1)]);
-            if(i === 0) row.style.backgroundColor = "greenyellow";
-            if(i != 0){
+            value = document.createTextNode(stackArray[stackArray.length - (i + 1)]);
+            if (i === 0) row.style.backgroundColor = "greenyellow";
+            if (i != 0) {
                 //Arrow 
                 arrow = document.createElement("tr");
                 stack.appendChild(arrow);
                 arrowData = document.createElement("td");
                 arrowText = document.createTextNode("↓");
                 arrowData.appendChild(arrowText);
-                arrow.appendChild(arrowData);  
+                arrow.appendChild(arrowData);
             }
             stack.appendChild(row);
             data = document.createElement("td");
@@ -101,7 +101,7 @@ function loadStack() {
     }
 }
 
-function saveStack(){
+function saveStack() {
     let qAux = new Array();
     let lAux = new Array();
     let qArray = getCookie("queueArray");
@@ -109,7 +109,7 @@ function saveStack(){
     let lArray = getCookie("listArray");
     if (lArray != "") lAux = lArray.split(",");
     setCookie(stackArray, qAux, lAux, 1);
-    alert ("Stack saved succesfully");
+    alert("Stack saved succesfully");
 }
 
 function push() {
@@ -156,43 +156,59 @@ function enqueue() {
     let row;
     let element = document.createElement("td");
     let arrow = document.createElement("td");
-    let head = document.createElement("td");
-    if (!queue.hasChildNodes()){
+    let tail = document.createElement("td");
+    let tailText = document.createTextNode("tail");
+    tail.appendChild(tailText);
+    tail.style.color = "red";
+    if (!queue.hasChildNodes()) {
         row = document.createElement("tr");
         queue.appendChild(row);
+        let head = document.createElement("td");
+        let headtext = document.createTextNode("head");
+        head.appendChild(headtext);
+        head.style.color = "red";
         row.appendChild(head);
         row.appendChild(element);
-        let headtext = document.createTextNode("head");
-        head.style.color = "red";
-        head.appendChild(headtext);
+        row.appendChild(tail);
     }
     else {
         row = queue.firstChild;
-        if(row.hasChildNodes()){
-            row.appendChild(arrow);
+        if (row.hasChildNodes()) {
+            let aux = row.lastChild;
+            row.replaceChild(arrow, aux);
             let arrowText = document.createTextNode("→");
             arrow.appendChild(arrowText);
         }
         row.appendChild(element);
+        row.appendChild(tail);
     }
     //data.className = "queueElement";
     let text = document.createTextNode(value);
     element.appendChild(text);
-    queueArray.push(value); 
+    queueArray.push(value);
 }
 
 function dequeue() {
-    if (queue.hasChildNodes()){
+    if (queue.hasChildNodes()) {
+        let head = document.createElement("td");
+        let headtext = document.createTextNode("head");
+        head.appendChild(headtext);
+        head.style.color = "red";
         let row = queue.firstChild;
-        if(row.hasChildNodes()) row.removeChild(row.firstChild);
-        if(row.hasChildNodes()) row.removeChild(row.firstChild);
+        if (row.hasChildNodes()) row.removeChild(row.firstChild);
+        if (row.hasChildNodes()) row.removeChild(row.firstChild);
+        if (row.hasChildNodes()) row.removeChild(row.firstChild);
+        if (row.hasChildNodes()) {
+            let aux = row.firstChild;
+            row.insertBefore(head, aux);
+        } else queue.removeChild(row);
     }
     queueArray.shift();
 }
 
 function newQueue() {
     console.log(queueArray);
-    if(queue.hasChildNodes()) queue.removeChild(queue.firstChild);
+    if (queue.hasChildNodes()) queue.removeChild(queue.firstChild);
     queueArray = new Array();
 }
 
@@ -200,18 +216,18 @@ function loadQueue() {
     let qArray = getCookie("queueArray");
     console.log(qArray);
     if (qArray != "") queueArray = qArray.split(",");
-    if(queueArray.length == 0) alert("No queue stored");
+    if (queueArray.length == 0) alert("No queue stored");
     else {
         //Delete any queue
-        if(queue.hasChildNodes()) queue.removeChild(queue.firstChild);
+        if (queue.hasChildNodes()) queue.removeChild(queue.firstChild);
         //Print the queue
         let row, value, arrow, arrowText, data;
-        let head = document.createElement("td");
         //Se crea la fila (solo habra una)
         row = document.createElement("tr");
         queue.appendChild(row);
         for (let i = 0; i < queueArray.length; i++) {
-            if(i === 0) {
+            if (i === 0) {
+                let head = document.createElement("td");
                 row.appendChild(head);
                 let headtext = document.createTextNode("head");
                 head.style.color = "red";
@@ -223,18 +239,24 @@ function loadQueue() {
             row.appendChild(data);
             data.appendChild(value);
             //si i es el ultimo elemento, no se imprime la flecha solo el nodo 
-            if(i != (queueArray.length-1)){
+            if (i != (queueArray.length - 1)) {
                 //Arrow 
                 arrow = document.createElement("td");
                 row.appendChild(arrow);
                 arrowText = document.createTextNode("→");
-                arrow.appendChild(arrowText);  
-            } 
-        }        
+                arrow.appendChild(arrowText);
+            } else {
+                let tail = document.createElement("td");
+                let tailText = document.createTextNode("tail");
+                tail.appendChild(tailText);
+                tail.style.color = "red";
+                row.appendChild(tail);
+            }
+        }
     }
 }
 
-function saveQueue(){
+function saveQueue() {
     let sAux = new Array();
     let lAux = new Array();
     let sArray = getCookie("stackArray");
@@ -243,7 +265,7 @@ function saveQueue(){
     if (lArray != "") lAux = lArray.split(",");
     console.log(queueArray);
     setCookie(sAux, queueArray, lAux, 1);
-    alert ("Queue saved successfully");
+    alert("Queue saved successfully");
 }
 
 //List
@@ -253,7 +275,7 @@ function loadList() {
     if (lArray != "") listArray = lArray.split(",");
 }
 
-function saveList(){
+function saveList() {
     let sAux = new Array();
     let qAux = new Array();
     let qArray = getCookie("queueArray");
@@ -261,7 +283,7 @@ function saveList(){
     let sArray = getCookie("stackArray");
     if (sArray != "") sAux = sArray.split(",");
     setCookie(sAux, qAux, listArray, 1);
-    alert ("List saved succesfully");
+    alert("List saved succesfully");
 }
 
 //Cookies 
