@@ -6,6 +6,20 @@
   font-family: body_proxima_nova;
   src: url(font/proxima_ssv/Proxima\ Nova\ Alt\ Light.otf);
 }
+.sbtnOptions{
+  border: 2px solid;
+  background-color: #2E2E2E;
+  color: #A9F5F2 ;
+  padding: 7px 14px;
+  font-size: 10px;
+  cursor: pointer;
+  border-color:#A9F5F2 ;
+
+}
+.sbtnOptions:hover {
+  background: #A9F5F2;
+  color:  #2E2E2E;
+}
 body{
   font-family: body_proxima_nova;
   margin: 0;
