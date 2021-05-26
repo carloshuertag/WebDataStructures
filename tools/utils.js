@@ -81,6 +81,7 @@ function saveStack() {
 }
 
 function push() {
+    //document.getElementById("sCode").style.color = "red";
     let value = document.getElementById("sElement").value;
     if(value == "") {
         alert("Please enter the data to push into the stack.");

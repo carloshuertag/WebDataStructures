@@ -75,44 +75,59 @@
           </table>
         </article>
         <article id="sCode">
-          #include &lt;stdlib.h&gt; <br />
-          #include &lt;stdbool.h&gt;<br />
-          #include &lt;limits.h&gt; <br />
-          #include &lt;stdio.h&gt; <br />
-          typedef int iStackEntry; <br />
-          typedef struct iStackElement { <br />
-            &nbsp;StackEntry entry; <br />
-            &nbsp;struct iStackElement* next; <br />
-          } iStackElement; <br />
-            &nbsp;typedef struct iStack { <br />
-            &nbsp;iStackElement* top; <br />
-          } iStack; <br /><br/>
+          #include &lt;stdlib.h&gt;<br/>
+          #include &lt;limits.h&gt;<br/>
+          #include &lt;stdio.h&gt;<br/><br/>
+          typedef int StackEntry;<br/>
+          typedef struct StackNode<br/>
+          {<br/>
+          &nbsp;&nbsp;StackEntry entry;<br/>
+          &nbsp;&nbsp;struct StackNode *next;<br/>
+          } StackNode;<br/>
+          typedef struct Stack<br/>
+          {<br/>
+              StackNode *head;<br/>
+              StackNode *tail;<br/>
+          } Stack;<br/>
           <article id="createStack">
-            iStack* createiStack() {<br/>
-              &nbsp;iStack* stack = (iStack*)malloc(sizeof(iStack));<br/>
-              &nbsp;stack->top = NULL;<br/>
-              &nbsp;return stack;<br/>
+            <span>Stack *createStack()</span><br/>
+            {<br/>
+            <span>&nbsp;&nbsp;Stack *stack = (Stack *)malloc(sizeof(Stack));</span><br/>
+            <span>&nbsp;&nbsp;stack->head = stack->tail = NULL;</span><br/>
+            <span>&nbsp;&nbsp;return stack;</span><br/>
+            }<br/>
+          </article><br/>
+          <article id="createStackNode">
+            <span>StackNode *createStackNode(StackEntry item)</span><br/>
+            {<br/>
+            <span>&nbsp;&nbsp;StackNode *node = (StackNode *)malloc(sizeof(StackNode));</span>               
+            <span>&nbsp;&nbsp;node->entry = item;</span><br/>
+            <span>&nbsp;&nbsp;return node;</span><br/>
             }<br/>
           </article><br/>
           <article id="pushCode">
-            void pushi(iStackEntry item, iStack* stack) {<br/>
-              &nbsp;iStackElement* element = createiElement(item);<br/>
-              &nbsp;element->next = stack->top;<br/>
-              &nbsp;stack->top = element;<br/>
+            <span>void push(StackEntry item, Stack *stack)</span><br/>
+            {<br/>
+            <span>&nbsp;&nbsp;StackNode *node = createStackNode(item);</span><br/>
+            <span>&nbsp;&nbsp;if(!stack->head) stack->tail = node; //isEmpty</span><br/>
+            <span>&nbsp;&nbsp;node->next = stack->head;</span><br/>
+            <span>&nbsp;&nbsp;stack->head = node;</span><br/>
             }<br/>
           </article><br />
           <article id="popCode">
-            iStackEntry popi(iStack* stack) {<br/>
-              &nbsp;iStackEntry popped = INT_MIN;<br/>
-              &nbsp;if (isiEmpty(stack)) {<br/>
-              &nbsp;puts("Error: current stack is empty");<br/>
-              &nbsp;return popped;<br/>
-            }<br/>
-            iStackElement* temp = stack->top;<br/>
-              &nbsp;stack->top = stack->top->next;<br/>
-              &nbsp;popped = temp->entry;<br/>
-              &nbsp;free(temp);<br/>
-              &nbsp;return popped;<br/>
+            <span>&nbsp;&nbsp;StackEntry pop(Stack *stack)</span><br/>
+            {<br/>
+            <span>StackEntry popped = INT_MIN;</span><br/>
+            <span>&nbsp;&nbsp;if (!stack->head) //isEmpty</span><br/>
+            &nbsp;&nbsp;{<br/>
+            <span>&nbsp;&nbsp;&nbsp;&nbsp;perror("Error: current stack is empty");</span><br/>
+            <span>&nbsp;&nbsp;&nbsp;&nbsp;return popped;</span><br/>
+            &nbsp;&nbsp;}<br/>
+            <span>&nbsp;&nbsp;StackNode *temp = stack->head;</span><br/>
+            <span>&nbsp;&nbsp;stack->head = stack->head->next;</span><br/>
+            <span>&nbsp;&nbsp;popped = temp->entry;</span><br/>
+            <span>&nbsp;&nbsp;free(temp);</span><br/>
+            <span>&nbsp;&nbsp;return popped;</span><br/>
             }<br/>
           </article>
         </article>
