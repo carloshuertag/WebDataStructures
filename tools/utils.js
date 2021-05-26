@@ -33,6 +33,8 @@ function newStack() {
     stackArray = new Array();
     document.getElementById("sHead").style.display = "none";
     document.getElementById("sTail").style.display = "none";
+
+    document.getElementById("createStack").style.color = "green";
 }
 
 function loadStack() {
@@ -40,7 +42,7 @@ function loadStack() {
     if (sArray != "") stackArray = sArray.split(",");
     if (stackArray.length == 0) alert("No stack stored");
     else {
-        //Delete any stack 
+        //Delete any stack
         while (stack.hasChildNodes()) stack.removeChild(stack.firstChild);
         //Print the stack
         let row, value, arrow, arrowText, arrowData, data;
@@ -48,7 +50,7 @@ function loadStack() {
             row = document.createElement("tr");
             value = document.createTextNode(stackArray[stackArray.length - (i + 1)]);
             if (i != 0) {
-                //Arrow 
+                //Arrow
                 arrow = document.createElement("tr");
                 stack.appendChild(arrow);
                 arrowData = document.createElement("td");
@@ -107,6 +109,8 @@ function push() {
     stackArray.push(value);
     document.getElementById("sHead").style.display = "block";
     document.getElementById("sTail").style.display = "block";
+
+    document.getElementById("pushCode").style.color = "green";
 }
 
 function pop() {
@@ -117,6 +121,9 @@ function pop() {
         document.getElementById("sTail").style.display = "none";
     } else stack.firstChild.firstChild.className = "stackHead";
     stackArray.pop();
+
+    document.getElementById("popCode").style.color = "green";
+
 }
 
 //Queue
@@ -209,9 +216,9 @@ function loadQueue() {
             data.className = "queueElement";
             row.appendChild(data);
             data.appendChild(value);
-            //si i es el ultimo elemento, no se imprime la flecha solo el nodo 
+            //si i es el ultimo elemento, no se imprime la flecha solo el nodo
             if (i != (queueArray.length - 1)) {
-                //Arrow 
+                //Arrow
                 arrow = document.createElement("td");
                 row.appendChild(arrow);
                 arrowText = document.createTextNode("→");
@@ -258,7 +265,7 @@ function saveList() {
     alert("List saved succesfully");
 }
 
-//Cookies 
+//Cookies
 
 function setCookie(sArray, qArray, lArray, exdays) {
     var d = new Date();
