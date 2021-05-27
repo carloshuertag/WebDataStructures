@@ -26,29 +26,52 @@ function loadPage() {
     list = document.getElementById("listAnimation");
 }
 
+//Code Animations
+
+function resetCodeAnimations(sectionId) {
+    let paragraphs = document.getElementById(sectionId).children;
+    for (let i = 0; i < paragraphs.length; i++) if(paragraphs.item(i).tagName != "br"){
+        let lines = paragraphs.item(i).children;
+        for (let j = 0; j < lines.length; j++) if(lines.item(j).tagName != "br"){
+            lines.item(j).style.color = document.body.style.color;
+            lines.item(j).style.backgroundColor = "";
+        }
+    }
+}
+
+function codeAnimation(articleId) {
+    let lines = document.getElementById(articleId).children;
+    for (let i = 0; i < lines.length; i++) if(lines.item(i).tagName != "br"){
+        lines.item(i).style.color = (document.body.style.color == "rgb(46, 46, 46)")
+            ? "rgba(0, 127, 63, 0.9)" : "rgba(0, 255, 127, 0.9)";
+        lines.item(i).style.backgroundColor = (document.body.style.color == "rgb(46, 46, 46)")
+            ? "rgba(0, 255, 127, 0.3)" : "rgba(0, 127, 63, 0.3)";
+    }
+}
+
 //Stack
 
 function newStack() {
+    resetCodeAnimations("sCode");
     while (stack.hasChildNodes()) stack.removeChild(stack.firstChild);
     stackArray = new Array();
     document.getElementById("sHead").style.display = "none";
     document.getElementById("sTail").style.display = "none";
+    codeAnimation("createStack");
 }
 
 function loadStack() {
+    resetCodeAnimations("sCode");
     let sArray = getCookie("stackArray");
     if (sArray != "") stackArray = sArray.split(",");
     if (stackArray.length == 0) alert("No stack stored");
     else {
-        //Delete any stack 
         while (stack.hasChildNodes()) stack.removeChild(stack.firstChild);
-        //Print the stack
         let row, value, arrow, arrowText, arrowData, data;
         for (let i = 0; i < stackArray.length; i++) {
             row = document.createElement("tr");
             value = document.createTextNode(stackArray[stackArray.length - (i + 1)]);
             if (i != 0) {
-                //Arrow 
                 arrow = document.createElement("tr");
                 stack.appendChild(arrow);
                 arrowData = document.createElement("td");
@@ -81,7 +104,7 @@ function saveStack() {
 }
 
 function push() {
-    //document.getElementById("sCode").style.color = "red";
+    resetCodeAnimations("sCode");
     let value = document.getElementById("sElement").value;
     if(value == "") {
         alert("Please enter the data to push into the stack.");
@@ -108,9 +131,12 @@ function push() {
     stackArray.push(value);
     document.getElementById("sHead").style.display = "block";
     document.getElementById("sTail").style.display = "block";
+    codeAnimation("pushCode");
+    codeAnimation("createStackNode");
 }
 
 function pop() {
+    resetCodeAnimations("sCode");
     if (stack.hasChildNodes()) stack.removeChild(stack.firstChild);
     if (stack.hasChildNodes()) stack.removeChild(stack.firstChild);
     if (!stack.hasChildNodes()) {
@@ -118,6 +144,7 @@ function pop() {
         document.getElementById("sTail").style.display = "none";
     } else stack.firstChild.firstChild.className = "stackHead";
     stackArray.pop();
+    codeAnimation("popCode");
 }
 
 //Queue

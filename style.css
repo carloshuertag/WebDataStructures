@@ -64,10 +64,14 @@ nav ul li:hover {
   grid-column: 2 / 5;
 }
 
-#sCode, #sCode p, #qCode, #qCode  p, #lCode, #lCode p {
+#sCode, #sCode span, #qCode, #qCode  span, #lCode, #lCode span {
   padding-left: 3%;
   font-family: monospace;
   text-align: left;
+  -webkit-transition: background-color 1s ease-out, color 1s ease-out;
+  -moz-transition: background-color 1s ease-out, color 1s ease-out;
+  -o-transition: background-color 1s ease-out, color 1s ease-out;
+  transition: background-color 1s ease-out, color 1s ease-out;
 }
 
 #sCode, #qCode, #lCode {
@@ -142,6 +146,19 @@ nav ul li{
 
 #newStack:hover, #saveStack:hover, #loadStack:hover, #push:hover, #pop:hover, #newQueue:hover, #saveQueue:hover, #loadQueue:hover, #enqueue:hover, #dequeue:hover {
   color:  rgba(0, 0, 0, 0.6);
+}
+
+label {
+  font-size: medium;
+  font-family: titles_proxima_nova;
+}
+
+input[type="text"], input[type="number"] {
+  border: none;
+  border-bottom: 0.5ex solid #2E2E2E;
+  padding: 2ex 1.5ex;
+  border-radius: 3ex;
+  background: #A9F5F2;
 }
 
 .switch {
