@@ -28,6 +28,7 @@ ListNode *createListNode(ListEntry item)
 {
     ListNode *node = (ListNode *)malloc(sizeof(ListNode));
     node->entry = item;
+    list->size++;
     return node;
 }
 
@@ -36,27 +37,24 @@ ListNode *createListNode(ListEntry item)
 void insertAtBeginning(ListEntry item, List *list)
 {
     ListNode *node = createListNode(item);
-    if(list->beginning == NULL){
-        list->beginning = list->end = node;
-    }
-    else{
+    if(list->beginning == NULL) list->beginning = list->end = node;
+    else
+    {
         node->next = list->beginning;
         list->beginning = node;
     }
-
-    list->size++;
-
 }
 
 //At any position
 void insertAt(ListEntry item, List *list, int position)
 {
     if(0<=position && position<list->size)
-        if(position==0) insertAtTheBeginning(item, list);
-        else{
+        if(position==0) insertAtBeginning(item, list);
+        else
+        {
             ListNode *node = createListNode(item);
             ListNode *previousNode = searchListNode(list->beginning, position-1);
-            ListNode *actualNode =previousNode->next;
+            ListNode *actualNode = previousNode->next;
             previousNode->next = node;
             node->next = actualNode;
         }
@@ -67,7 +65,8 @@ ListNode *searchListNode(List *list, int position){
     if(position==0) return list->beginning;
     if(position==length-1) return list->end;
     ListNode *aux = list->beginning;
-    while(position!=0){
+    while(position!=0)
+    {
         aux = aux->next;
         position--;
     }
@@ -79,7 +78,8 @@ void insertAtEnd(ListEntry item, List *list)
 {
     ListNode *node = createListNode(item);
     if(list->beginning == NULL) list->beginning = list->end = node;
-    else{
+    else
+    {
         list->end->next = node;
         list->end = node;
         node->next = null;

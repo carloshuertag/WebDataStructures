@@ -35,14 +35,13 @@ QueueNode *createQueueNode(QueueEntry item)
 void enqueue(QueueEntry item, Queue *queue)
 {
     QueueNode *node = CreateQueueNode(item);
-    if((queue->head)==NULL) { 
-        queue->head = queue->tail = node;
-    else{
+    if((queue->head)==NULL) queue->head = queue->tail = node;
+    else
+    {
         queue->tail->next = node;
         queue->tail = node;
         node->next = NULL;
     }
-    
 }
 
 //The element dequeued is always the one at the head of the queue 
