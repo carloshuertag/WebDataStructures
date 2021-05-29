@@ -88,17 +88,42 @@ void insertAtEnd(ListEntry item, List *list)
 
 //Delete 
 //At the beginning
-void deleteAtTheBeginning(List *list){
-
+void deleteAtBeginning(List *list){
+    if ((list->beginning)==NULL) perror("Error: current queue is empty");
+    else
+    {
+        ListNode *temp = list->beginning;
+        list->beginning = list->beginning->next;
+        free(temp);
+        list->size--;
+    }
 }
 
 //At any position
 void deleteAt(List *list, int position){
-
+    if(0<=position && position<list->size)
+        if(position==0) deleteAtBeginning(list);
+        else if(position==list->size-1) deleteAtEnd(list);
+        else
+        {
+            ListNode *previousNode = searchListNode(list, position-1);
+            List *temp = previousNode->next;
+            previousNode->next = previousNode->next->next;
+            free(temp);
+            list->size--;
+        }
+    else perror("Error: invalid position");
 }
 
 //At the end
-void deleteAtTheEnd(ListEntry item, List *list){
-    
+void deleteAtEnd(ListEntry item, List *list){
+    if ((list->end)==NULL) perror("Error: current queue is empty");
+    else
+    {
+        ListNode *temp = list->end;
+        list->end = searchListNode(list,(list->size)-2);
+        free(temp);
+        list->size--;
+    }
 }
 
