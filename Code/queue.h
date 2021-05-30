@@ -10,7 +10,6 @@ typedef struct QueueNode
     struct QueueNode *next;
 } QueueNode;
 
-
 typedef struct Queue
 {
     QueueNode *head;
@@ -18,7 +17,7 @@ typedef struct Queue
 } Queue;
 
 Queue *createQueue()
-{  
+{
     Queue *queue = (Queue *)malloc(sizeof(Queue));
     queue->head = queue->tail = NULL;
     return queue;
@@ -31,11 +30,11 @@ QueueNode *createQueueNode(QueueEntry item)
     return node;
 }
 
-//When an element is enqueued, it takes its place at the tail of the queue
 void enqueue(QueueEntry item, Queue *queue)
 {
-    QueueNode *node = CreateQueueNode(item);
-    if((queue->head)==NULL) queue->head = queue->tail = node;
+    QueueNode *node = createQueueNode(item);
+    if ((queue->head) == NULL)
+        queue->head = queue->tail = node;
     else
     {
         queue->tail->next = node;
@@ -44,11 +43,10 @@ void enqueue(QueueEntry item, Queue *queue)
     }
 }
 
-//The element dequeued is always the one at the head of the queue 
 QueueEntry dequeue(Queue *queue)
 {
     QueueEntry dequeued = INT_MIN;
-    if ((queue->head)==NULL) 
+    if ((queue->head) == NULL)
     {
         perror("Error: current queue is empty");
         return dequeued;

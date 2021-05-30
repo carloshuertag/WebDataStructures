@@ -15,7 +15,7 @@ typedef struct Stack
 } Stack;
 
 Stack *createStack()
-{  
+{
     Stack *stack = (Stack *)malloc(sizeof(Stack));
     stack->head = stack->tail = NULL;
     return stack;
@@ -31,7 +31,8 @@ StackNode *createStackNode(StackEntry item)
 void push(StackEntry item, Stack *stack)
 {
     StackNode *node = createStackNode(item);
-    if(!stack->head) stack->tail = node; //isEmpty
+    if (!stack->head)
+        stack->tail = node; //isEmpty
     node->next = stack->head;
     stack->head = node;
 }

@@ -41,12 +41,14 @@ function resetCodeAnimations(sectionId) {
 
 function codeAnimation(articleId) {
     let lines = document.getElementById(articleId).children;
-    for (let i = 0; i < lines.length; i++) if(lines.item(i).tagName != "br"){
+    let i;
+    for (i = 0; i < lines.length; i++) if(lines.item(i).tagName != "br"){
         lines.item(i).style.color = (document.body.style.color == "rgb(46, 46, 46)")
             ? "rgba(0, 127, 63, 0.9)" : "rgba(0, 255, 127, 0.9)";
         lines.item(i).style.backgroundColor = (document.body.style.color == "rgb(46, 46, 46)")
             ? "rgba(0, 255, 127, 0.3)" : "rgba(0, 127, 63, 0.3)";
     }
+    lines.item(0).scrollIntoView();
 }
 
 //Stack
@@ -150,7 +152,12 @@ function pop() {
 //Queue
 
 function enqueue() {
+    resetCodeAnimations("qCode");
     let value = document.getElementById("qElement").value;
+    if(value == "") {
+        alert("Please enter the data to enqueues.");
+        return;
+    }
     let row;
     let element = document.createElement("td");
     let arrow = document.createElement("td");
@@ -184,9 +191,12 @@ function enqueue() {
     let text = document.createTextNode(value);
     element.appendChild(text);
     queueArray.push(value);
+    codeAnimation("enqueueCode");
+    codeAnimation("createQueueNode");
 }
 
 function dequeue() {
+    resetCodeAnimations("qCode");
     if (queue.hasChildNodes()) {
         let head = document.createElement("td");
         let headtext = document.createTextNode("head");
@@ -202,17 +212,19 @@ function dequeue() {
         } else queue.removeChild(row);
     }
     queueArray.shift();
+    codeAnimation("dequeueCode");
 }
 
 function newQueue() {
-    console.log(queueArray);
+    resetCodeAnimations("qCode");
     if (queue.hasChildNodes()) queue.removeChild(queue.firstChild);
     queueArray = new Array();
+    codeAnimation("createQueue");
 }
 
 function loadQueue() {
+    resetCodeAnimations("sCode");
     let qArray = getCookie("queueArray");
-    console.log(qArray);
     if (qArray != "") queueArray = qArray.split(",");
     if (queueArray.length == 0) alert("No queue stored");
     else {
@@ -263,7 +275,6 @@ function saveQueue() {
     if (sArray != "") sAux = sArray.split(",");
     let lArray = getCookie("listArray");
     if (lArray != "") lAux = lArray.split(",");
-    console.log(queueArray);
     setCookie(sAux, queueArray, lAux, 1);
     alert("Queue saved successfully");
 }
@@ -285,6 +296,7 @@ function saveList() {
     setCookie(sAux, qAux, listArray, 1);
     alert("List saved succesfully");
 }
+
 
 //Cookies 
 

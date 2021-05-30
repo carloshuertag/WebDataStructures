@@ -88,7 +88,7 @@
           {<br/>
               StackNode *head;<br/>
               StackNode *tail;<br/>
-          } Stack;<br/>
+          } Stack;<br/><br/>
           <article id="createStack">
             <span>Stack *createStack()</span><br/>
             {<br/>
@@ -109,7 +109,8 @@
             <span>void push(StackEntry item, Stack *stack)</span><br/>
             {<br/>
             <span>&nbsp;&nbsp;StackNode *node = createStackNode(item);</span><br/>
-            <span>&nbsp;&nbsp;if(!stack->head) stack->tail = node; //isEmpty</span><br/>
+            <span>&nbsp;&nbsp;if(!stack->head) </span><br/>
+            <span>&nbsp;&nbsp;&nbsp;&nbsp;stack->tail = node; //isEmpty</span>
             <span>&nbsp;&nbsp;node->next = stack->head;</span><br/>
             <span>&nbsp;&nbsp;stack->head = node;</span><br/>
             }<br/>
@@ -135,6 +136,11 @@
     </section>
     <section id="queue">
       <section class="dsGrid">
+        <article id="qAnimation">
+          <table>
+            <tbody id="queueAnimation"></tbody>
+          </table>
+        </article>
         <article id="qOptions">
           <button id="newQueue"><img src="icons/load.svg" />New Queue</button>
           <span class="buttonSpace"></span>
@@ -150,12 +156,64 @@
           <br /><br />
           <button id="dequeue"><img src="icons/remove.svg" />Dequeue</button>
         </article>
-        <article id="qAnimation">
-          <table>
-            <tbody id="queueAnimation"></tbody>
-          </table>
-        </article>
         <article id="qCode">
+          #include &lt;stdlib.h&gt;<br/>
+          #include &lt;limits.h&gt;<br/>
+          #include &lt;stdio.h&gt;<br/><br/>
+          typedef int QueueEntry;<br/>
+          typedef struct QueueNode<br/>
+          {<br/> 
+            &nbsp;&nbsp;QueueEntry entry;<br/>
+            &nbsp;&nbsp;struct QueueNode *next;<br/>
+          } QueueNode;<br/>
+          typedef struct Queue<br/>
+          {<br/>
+            &nbsp;&nbsp;QueueNode *head;<br/>
+            &nbsp;&nbsp;QueueNode *tail;<br/>
+          } Queue;<br/><br/>
+          <article id="createQueue">
+              <span>Queue *createQueue()</span><br/>
+              {<br/>
+              <span>&nbsp;&nbsp;Queue *queue = (Queue *)malloc(sizeof(Queue));</span><br/>
+              <span>&nbsp;&nbsp;queue->head = queue->tail = NULL;</span><br/>
+              <span>&nbsp;&nbsp;return queue;</span><br/>
+              }<br/>
+          </article><br/>
+          <article id="createQueueNode">
+            <span>QueueNode *createQueueNode(QueueEntry item)</span><br/>
+            {<br/>
+            <span>&nbsp;&nbsp;QueueNode *node = (QueueNode *)malloc(sizeof(QueueNode));</span><br/>
+            <span>&nbsp;&nbsp;node->entry = item;</span><br/>
+            <span>&nbsp;&nbsp;return node;</span><br/>
+            }<br/>
+          </article><br/>
+          <article id="enqueueCode">
+            <span>void enqueue(QueueEntry item, Queue *queue)</span><br/>
+            {<br/>
+            <span>&nbsp;&nbsp;QueueNode *node = createQueueNode(item);</span><br/>
+            <span>&nbsp;&nbsp;if((queue->head)==NULL) queue->head = queue->tail = node;</span><br/>
+            <span>&nbsp;&nbsp;else {</span><br/>
+            <span>&nbsp;&nbsp;&nbsp;&nbsp;queue->tail->next = node;</span><br/>
+            <span>&nbsp;&nbsp;&nbsp;&nbsp;queue->tail = node;</span><br/>
+            <span>&nbsp;&nbsp;&nbsp;&nbsp;node->next = NULL;</span><br/>
+            &nbsp;&nbsp;}<br/>
+            }<br/>
+          </article><br/>
+          <article id="dequeueCode">
+            <span>QueueEntry dequeue(Queue *queue)</span><br/>
+            {<br/>
+              <span>&nbsp;&nbsp;QueueEntry dequeued = INT_MIN;</span><br/>
+              <span>&nbsp;&nbsp;if ((queue->head)==NULL){</span><br/>
+                  <span>&nbsp;&nbsp;&nbsp;&nbsp;perror("Error: current queue is empty");</span><br/>
+                  <span>&nbsp;&nbsp;&nbsp;&nbsp;return dequeued;</span><br/>
+                &nbsp;&nbsp;}<br/>        
+              <span>&nbsp;&nbsp;QueueNode *temp = queue->head;</span><br/>
+              <span>&nbsp;&nbsp;queue->head = queue->head->next;</span><br/>
+              <span>&nbsp;&nbsp;dequeued = temp->entry;</span><br/>
+              <span>&nbsp;&nbsp;free(temp);</span><br/>
+              <span>&nbsp;&nbsp;return dequeued;</span><br/>
+            }<br/>
+          </article>
         </article>
       </section>
     </section>
