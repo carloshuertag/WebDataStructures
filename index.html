@@ -45,19 +45,20 @@
     <section id="stack">
       <section class="dsGrid">
         <article id="sOptions">
-          <button id="newStack"><span><img src="icons/new.svg" /></span>New Stack</button>
+          <button class="btn" id="newStack"><span><img src="icons/new.svg" /></span>New Stack</button>
           <span class="buttonSpace"></span>
-          <button id="saveStack"><img src="icons/save.svg" />Save Stack</button>
+          <button class="btn" id="saveStack"><img src="icons/save.svg" />Save Stack</button>
           <span class="buttonSpace"></span>
-          <button id="loadStack"><img src="icons/load.svg" />Load Stack</button>
-          <br /><br />
+          <button class="btn" id="loadStack"><img src="icons/load.svg" />Load Stack</button>
+          <br/><br/>
           <form>
             <label for="sElement">Element:</label>
             <input id="sElement" name="sElement" type="number" size="8" required />
-            <button type="button" id="push"><img src="icons/add.svg" />Push</button>
+            <span class="buttonSpace"></span>
+            <button class="btn" type="button" id="push"><img src="icons/add.svg" />Push</button>
           </form>
-          <br /><br />
-          <button id="pop"><img src="icons/remove.svg" />Pop</button>
+          <br/>
+          <button class="btn" id="pop"><img src="icons/remove.svg" />Pop</button>
         </article>
         <article id="sAnimation">
           <table>
@@ -142,19 +143,20 @@
           </table>
         </article>
         <article id="qOptions">
-          <button id="newQueue"><img src="icons/load.svg" />New Queue</button>
+          <button class="btn" id="newQueue"><img src="icons/load.svg" />New Queue</button>
           <span class="buttonSpace"></span>
-          <button id="saveQueue"><img src="icons/save.svg" />Save Queue</button>
+          <button class="btn" id="saveQueue"><img src="icons/save.svg" />Save Queue</button>
           <span class="buttonSpace"></span>
-          <button id="loadQueue"><img src="icons/load.svg" />Load Queue</button>
+          <button class="btn" id="loadQueue"><img src="icons/load.svg" />Load Queue</button>
           <br /><br />
           <form>
             <label for="qElement">Element:</label>
             <input id="qElement" name="qElement" type="number" size="8" required />
-            <button type="button" id="enqueue"><img src="icons/add.svg" />Enqueue</button>
+            <span class="buttonSpace"></span>
+            <button class = "btn" type="button" id="enqueue"><img src="icons/add.svg" />Enqueue</button>
           </form>
-          <br /><br />
-          <button id="dequeue"><img src="icons/remove.svg" />Dequeue</button>
+          <br/>
+          <button class="btn" id="dequeue"><img src="icons/remove.svg" />Dequeue</button>
         </article>
         <article id="qCode">
           #include &lt;stdlib.h&gt;<br/>
@@ -219,18 +221,167 @@
     </section>
     <section id="list">
       <section class="dsGrid">
-        <article id="lOptions">
-
-        </article>
         <article id="lAnimation">
-
+          <table>
+            <tbody id="listAnimation"></tbody>
+          </table>
+        </article>
+        <article id="lOptions">
+          <button class="btn" id="newList"><span><img src="icons/new.svg" /></span>New List</button>
+          <span class="buttonSpace"></span>
+          <button class="btn" id="saveList"><img src="icons/save.svg" />Save List</button>
+          <span class="buttonSpace"></span>
+          <button class="btn" id="loadList"><img src="icons/load.svg" />Load List</button>
+          <br/><br/>
+          <form>
+            <label for="lElement">Element:</label>
+            <input id="lElement" name="lElement" type="number" size="8" required/>
+            <span class="buttonSpace"></span>
+            <label for="lPosition">Position:</label>
+            <input id="lPosition" name="lPosition" type="number" size="8" required/>
+            <br/><br/>
+            <button class="btn" type="button" id="insertAtStart"><img src="icons/add.svg"/>Insert at start</button>
+            <span class="buttonSpace"></span>
+            <button class="btn" type="button" id="insertAt"><img src="icons/add.svg"/>Insert at</button>
+            <span class="buttonSpace"></span>
+            <button class="btn" type="button" id="append"><img src="icons/add.svg"/>Append</button><br/><br>
+            <button class="btn" type="button" id="deleteAtStart"><img src="icons/remove.svg"/>Delete at start</button>
+            <span class="buttonSpace"></span>
+            <button class="btn" type="button" id="deleteAt"><img src="icons/remove.svg"/>Delete at</button>
+            <span class="buttonSpace"></span>
+            <button class="btn" type="button" id="deleteAtEnd"><img src="icons/remove.svg"/>Delete at end</button>
+          </form>
         </article>
         <article id="lCode">
-
+          #include &lt;stdlib.h&gt;<br/>
+          #include &lt;stdio.h&gt;<br/>
+          typedef int ListEntry;<br/><br/>
+          typedef struct ListNode<br/>
+          {<br/>
+              &nbsp;&nbsp;ListEntry entry;<br/>
+              &nbsp;&nbsp;struct ListNode *next;<br/>
+          } ListNode;<br/>
+          typedef struct List<br/> 
+          {<br/>
+              &nbsp;&nbsp;ListNode *start;<br/>
+              &nbsp;&nbsp;ListNode *end;<br/>
+              &nbsp;&nbsp;int size;<br/>
+          } List;<br/><br/>
+          <article id="createList">
+            <span>List *createList()</span><br/>
+            {<br/>
+              <span>&nbsp;&nbsp;List *list = (List *)malloc(sizeof(List));</span><br/>
+              <span>&nbsp;&nbsp;list->start = list->end = NULL;</span><br/>
+              <span>&nbsp;&nbsp;list->size = 0;</span><br/>
+              <span>&nbsp;&nbsp;return list;</span><br/>
+            }<br/>
+          </article><br/>
+          <article id="createListNode">
+            <span>ListNode *createListNode(ListEntry item)</span><br/>
+            {<br/>
+              <span>&nbsp;&nbsp;ListNode *node = (ListNode *)malloc(sizeof(ListNode));</span><br/>
+              <span>&nbsp;&nbsp;node->entry = item;</span><br/>
+              <span>&nbsp;&nbsp;return node;</span><br/>
+            }<br/>
+          </article><br/>
+          <article id="insertAtStartCode">
+            <span>void insertAtStart(ListEntry item, List *list)</span><br/>
+            {<br/>
+                <span>&nbsp;&nbsp;ListNode *node = createListNode(item);</span><br/>
+                <span>&nbsp;&nbsp;if(list->start == NULL) list->start = list->end = node;</span><br/>
+                <span>&nbsp;&nbsp;else {</span><br/>
+                    <span>&nbsp;&nbsp;&nbsp;&nbsp;node->next = list->start;</span><br/>
+                    <span>&nbsp;&nbsp;&nbsp;&nbsp;list->start = node;</span><br/>
+                <span>}</span><br/>
+                <span>&nbsp;&nbsp;list->size++;</span><br/>
+            }<br/>
+          </article><br/>
+          <article id="insertAtCode">
+            <span>void insertAt(ListEntry item, List *list, int position)</span><br/>
+            {<br/>
+                <span>&nbsp;&nbsp;if(0&lt;=position && position<list->size)</span><br/>
+                    <span>&nbsp;&nbsp;if(position==0) insertAtStart(item, list);</span><br/>
+                    <span>&nbsp;&nbsp;else {</span><br/>
+                        <span>&nbsp;&nbsp;&nbsp;&nbsp;ListNode *node = createListNode(item);</span><br/>
+                        <span>&nbsp;&nbsp;&nbsp;&nbsp;ListNode *previousNode = searchListNode(list, position-1);</span><br/>
+                        <span>&nbsp;&nbsp;&nbsp;&nbsp;ListNode *actualNode = previousNode->next;</span><br/>
+                        <span>&nbsp;&nbsp;&nbsp;&nbsp;previousNode->next = node;</span><br/>
+                        <span>&nbsp;&nbsp;&nbsp;&nbsp;node->next = actualNode;</span><br/>
+                        <span>&nbsp;&nbsp;&nbsp;&nbsp;list->size++;</span><br/>
+                    <span>}</span><br/>
+                <span>&nbsp;&nbsp;else perror("Error: invalid position");</span><br/>
+            }<br/>
+          </article><br/>
+          <article id="searchListNode">
+            <span>ListNode *searchListNode(List *list, int position)</span><br/>
+            {<br/>
+              <span>&nbsp;&nbsp;if(position==0) return list->start;</span><br/>
+              <span>&nbsp;&nbsp;if(position==list->size-1) return list->end;</span><br/>
+              <span>&nbsp;&nbsp;ListNode *aux = list->start;</span><br/>
+              <span>&nbsp;&nbsp;while(position!=0) {</span><br/>
+                  <span>&nbsp;&nbsp;&nbsp;&nbsp;aux = aux->next;</span><br/>
+                  <span>&nbsp;&nbsp;&nbsp;&nbsp;position--;</span><br/>
+              <span>&nbsp;&nbsp;}</span><br/>
+              <span>&nbsp;&nbsp;return aux;</span><br/>
+          }<br/> 
+          </article><br/>
+          <article id="appendCode">
+            <span>void append(ListEntry item, List *list)</span><br/> 
+            {<br/>
+                <span>&nbsp;&nbsp;ListNode *node = createListNode(item);</span><br/>
+                <span>&nbsp;&nbsp;if(list->start == NULL) list->start = list->end = node;</span><br/>
+                <span>&nbsp;&nbsp;else {</span><br/>
+                    <span>&nbsp;&nbsp;&nbsp;&nbsp;list->end->next = node;</span><br/>
+                    <span>&nbsp;&nbsp;&nbsp;&nbsp;list->end = node;</span><br/>
+                    <span>&nbsp;&nbsp;&nbsp;&nbsp;node->next = NULL;</span><br/>
+                <span>&nbsp;&nbsp;}</span><br/>
+                <span>&nbsp;&nbsp;list->size++;</span><br/>
+            }<br/>
+          </article><br/>
+          <article id="deleteAtStartCode">
+            <span>void deleteAtStart(List *list)</span><br/>
+            {<br/>
+                <span>&nbsp;&nbsp;if ((list->beginning)==NULL) perror("Error: current queue is empty");</span><br/>
+                <span>&nbsp;&nbsp;else {</span><br/>
+                    <span>&nbsp;&nbsp;&nbsp;&nbsp;ListNode *temp = list->start;</span><br/>
+                    <span>&nbsp;&nbsp;&nbsp;&nbsp;list->start = list->start->next;</span><br/>
+                    <span>&nbsp;&nbsp;&nbsp;&nbsp;free(temp);</span><br/>
+                    <span>&nbsp;&nbsp;&nbsp;&nbsp;list->size--;</span><br/>
+                <span>&nbsp;&nbsp;}</span><br/>
+            }<br/><br/>
+          </article><br/>
+          <article id="deleteAtCode">
+            <span>void deleteAt(List *list, int position)</span><br/>
+            {<br/>
+                <span>&nbsp;&nbsp;if(0&lt;=position && position<list->size)</span><br/>
+                    <span>&nbsp;&nbsp;&nbsp;&nbsp;if(position==0) deleteAtStart(list);</span><br/>
+                    <span>&nbsp;&nbsp;&nbsp;&nbsp;else if(position==list->size-1) deleteAtEnd(list);</span><br/>
+                    <span>&nbsp;&nbsp;&nbsp;&nbsp;else {</span><br/>
+                        <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ListNode *previousNode = searchListNode(list, position-1);</span><br/>
+                        <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ListNode *temp = previousNode->next;</span><br/>
+                        <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;previousNode->next = previousNode->next->next;</span><br/>
+                        <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;free(temp);</span><br/>
+                        <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;list->size--;</span><br/>
+                    <span>&nbsp;&nbsp;&nbsp;&nbsp;}</span><br/>
+                <span>&nbsp;&nbsp;else perror("Error: invalid position");</span><br/>
+            }<br/>
+          </article><br/>
+          <article id="deleteAtEndCode">
+            <span>void deleteAtEnd(List *list)</span><br/>
+            {<br/>
+                <span>&nbsp;&nbsp;if ((list->end)==NULL) perror("Error: current queue is empty");</span><br/>
+                <span>&nbsp;&nbsp;else {</span><br/>
+                    <span>&nbsp;&nbsp;&nbsp;&nbsp;ListNode *temp = list->end;</span><br/>
+                    <span>&nbsp;&nbsp;&nbsp;&nbsp;list->end = searchListNode(list,(list->size) - 2);</span><br/>
+                    <span>&nbsp;&nbsp;&nbsp;&nbsp;list->end->next = NULL;</span><br/>
+                    <span>&nbsp;&nbsp;&nbsp;&nbsp;free(temp);</span><br/>
+                    <span>&nbsp;&nbsp;&nbsp;&nbsp;list->size--;</span><br/>
+                <span>&nbsp;&nbsp;}</span><br/>
+            }<br/>
+          </article><br/>
         </article>
       </section>
     </section>
   </main>
 </body>
-
 </html>

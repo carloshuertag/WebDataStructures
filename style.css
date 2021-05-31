@@ -81,7 +81,7 @@ nav ul li:hover {
   scrollbar-width: none;
 }
 
-#sCode, #lCode {
+#sCode {
   max-height: 65vh;
 }
 
@@ -106,7 +106,7 @@ nav ul li:hover {
   padding: 3%;
 }
 
-#qAnimation {
+#qAnimation, #lAnimation {
   grid-column: 1 / 4;
   -ms-overflow-style: none;
   scrollbar-width: none;
@@ -114,7 +114,7 @@ nav ul li:hover {
   max-width: 100%;
 }
 
-#qOptions {
+#qOptions, #lOptions {
   grid-column: 1 / 3;
 }
 
@@ -143,7 +143,7 @@ nav ul li{
   display: inline-block;
 }
 
-#newStack, #saveStack, #loadStack, #push, #pop, #newQueue, #saveQueue, #loadQueue, #enqueue, #dequeue {
+.btn {
   border: 0ex;
   background: #A9F5F2;
   color: #2E2E2E ;
@@ -157,13 +157,13 @@ nav ul li{
   overflow: hidden;
 }
 
-#newStack img, #saveStack img, #loadStack img, #push img, #pop img, #newQueue img, #saveQueue img, #loadQueue img, #enqueue img, #dequeue img {
+.btn img {
   width: 2.2ex;
   height: 2.2ex;
   padding-right: 1ex;
 }
 
-#newStack:hover, #saveStack:hover, #loadStack:hover, #push:hover, #pop:hover, #newQueue:hover, #saveQueue:hover, #loadQueue:hover, #enqueue:hover, #dequeue:hover {
+.btn:hover {
   color:  rgba(0, 0, 0, 0.6);
 }
 

@@ -19,7 +19,15 @@ function loadPage() {
     document.getElementById("saveQueue").addEventListener("click", saveQueue, false);
     document.getElementById("loadQueue").addEventListener("click", loadQueue, false);
     //list
-
+    document.getElementById("insertAtStart").addEventListener("click", insertAtStart, false);
+    document.getElementById("insertAt").addEventListener("click", insertAt, false);
+    document.getElementById("append").addEventListener("click", append, false);
+    document.getElementById("deleteAtStart").addEventListener("click", deleteAtStart, false);
+    document.getElementById("deleteAt").addEventListener("click", deleteAt, false);
+    document.getElementById("deleteAtEnd").addEventListener("click", deleteAtEnd, false);
+    document.getElementById("newList").addEventListener("click", newList, false);
+    document.getElementById("saveList").addEventListener("click", saveList, false);
+    document.getElementById("loadList").addEventListener("click", loadList, false);
     //Objets
     stack = document.getElementById("stackAnimation");
     queue = document.getElementById("queueAnimation");

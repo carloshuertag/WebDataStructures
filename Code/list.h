@@ -10,7 +10,7 @@ typedef struct ListNode
 
 typedef struct List  
 {
-    ListNode *beginning;
+    ListNode *start;
     ListNode *end;
     int size;
 } List;
@@ -18,7 +18,7 @@ typedef struct List
 List *createList() 
 {  
     List *list = (List *)malloc(sizeof(List));
-    list->beginning = list->end = NULL;
+    list->start = list->end = NULL;
     list->size = 0;
     return list;
 }
@@ -30,13 +30,13 @@ ListNode *createListNode(ListEntry item)
     return node;
 }
 
-void insertAtBeginning(ListEntry item, List *list)
+void insertAtStart(ListEntry item, List *list)
 {
     ListNode *node = createListNode(item);
-    if(list->beginning == NULL) list->beginning = list->end = node;
+    if(list->start == NULL) list->start = list->end = node;
     else {
-        node->next = list->beginning;
-        list->beginning = node;
+        node->next = list->start;
+        list->start = node;
     }
     list->size++;
 }
@@ -44,7 +44,7 @@ void insertAtBeginning(ListEntry item, List *list)
 void insertAt(ListEntry item, List *list, int position)
 {
     if(0<=position && position<list->size)
-        if(position==0) insertAtBeginning(item, list);
+        if(position==0) insertAtStart(item, list);
         else {
             ListNode *node = createListNode(item);
             ListNode *previousNode = searchListNode(list, position-1);
@@ -58,9 +58,9 @@ void insertAt(ListEntry item, List *list, int position)
 
 ListNode *searchListNode(List *list, int position)
 {
-    if(position==0) return list->beginning;
+    if(position==0) return list->start;
     if(position==list->size-1) return list->end;
-    ListNode *aux = list->beginning;
+    ListNode *aux = list->start;
     while(position!=0) {
         aux = aux->next;
         position--;
@@ -71,7 +71,7 @@ ListNode *searchListNode(List *list, int position)
 void insertAtEnd(ListEntry item, List *list) 
 {
     ListNode *node = createListNode(item);
-    if(list->beginning == NULL) list->beginning = list->end = node;
+    if(list->start == NULL) list->start = list->end = node;
     else {
         list->end->next = node;
         list->end = node;
@@ -80,12 +80,12 @@ void insertAtEnd(ListEntry item, List *list)
     list->size++;
 }
 
-void deleteAtBeginning(List *list)
+void deleteAtStart(List *list)
 {
-    if ((list->beginning)==NULL) perror("Error: current queue is empty");
+    if ((list->start)==NULL) perror("Error: current queue is empty");
     else {
-        ListNode *temp = list->beginning;
-        list->beginning = list->beginning->next;
+        ListNode *temp = list->start;
+        list->start = list->start->next;
         free(temp);
         list->size--;
     }
@@ -94,7 +94,7 @@ void deleteAtBeginning(List *list)
 void deleteAt(List *list, int position)
 {
     if(0<=position && position<list->size)
-        if(position==0) deleteAtBeginning(list);
+        if(position==0) deleteAtStart(list);
         else if(position==list->size-1) deleteAtEnd(list);
         else {
             ListNode *previousNode = searchListNode(list, position-1);
