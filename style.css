@@ -21,7 +21,20 @@ header span, nav li {
   padding: 3%;
 }
 
+table {
+  border-spacing: 0ex;
+}
+
 .stackElement, .queueElement{
+  border: 0.3ex solid rgba(0, 0, 0, 0.5);
+  border-radius: 1.5ex;
+  background: #A9F5F2;
+  color: #2E2E2E ;
+  text-align: center;
+  padding: 1ex 1ex;
+}
+
+.listElement {
   border: 0.3ex solid rgba(0, 0, 0, 0.5);
   background: #A9F5F2;
   color: #2E2E2E ;
@@ -244,4 +257,42 @@ input:checked + .slider:before {
 
 .slider.round:before {
   border-radius: 50%;
+}
+
+.tooltip {
+  position: relative;
+  display: inline-block;
+}
+
+.tooltip .tooltiptext {
+  visibility: hidden;
+  width: 120px;
+  background-color: #555;
+  color: #fff;
+  text-align: center;
+  padding: 5px 0;
+  border-radius: 6px;
+  position: absolute;
+  z-index: 1;
+  bottom: 125%;
+  left: 50%;
+  margin-left: -60px;
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.tooltip .tooltiptext::after {
+  content: "";
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  margin-left: -5px;
+  border-width: 5px;
+  border-style: solid;
+  border-color: #555 transparent transparent transparent;
+}
+
+.tooltip:hover .tooltiptext {
+  visibility: visible;
+  opacity: 1;
 }

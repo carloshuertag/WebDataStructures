@@ -290,8 +290,50 @@ function saveQueue() {
 //List
 
 function loadList() {
+    resetCodeAnimations("lCode");
     let lArray = getCookie("listArray");
     if (lArray != "") listArray = lArray.split(",");
+    if (listArray.length == 0) alert("No list stored");
+    else {
+        //Delete any list
+        if (list.hasChildNodes()) list.removeChild(list.firstChild);
+        //Print the list
+        let row, value, arrow, arrowText, data;
+        //Se crea la fila (solo habra una)
+        row = document.createElement("tr");
+        queue.appendChild(row);
+        for (let i = 0; i < queueArray.length; i++) {
+            if (i === 0) {
+                let head = document.createElement("td");
+                row.appendChild(head);
+                let headtext = document.createTextNode("head");
+                head.style.color = "#FA5858";
+                head.appendChild(headtext);
+            }
+            value = document.createTextNode(queueArray[i]);
+            //agregar el nodo (una columna)
+            data = document.createElement("td");
+            data.className = "queueElement";
+            row.appendChild(data);
+            data.appendChild(value);
+            //si i es el ultimo elemento, no se imprime la flecha solo el nodo 
+            if (i != (queueArray.length - 1)) {
+                //Arrow 
+                arrow = document.createElement("td");
+                row.appendChild(arrow);
+                arrowText = document.createTextNode("→");
+                arrow.appendChild(arrowText);
+            } else {
+                let tail = document.createElement("td");
+                let tailText = document.createTextNode("tail");
+                tail.appendChild(tailText);
+                tail.style.color = "#FA5858";
+                row.appendChild(tail);
+            }
+        }
+        alert("Queue previously stored loaaded successfully");
+    }
+
 }
 
 function saveList() {
@@ -303,6 +345,95 @@ function saveList() {
     if (sArray != "") sAux = sArray.split(",");
     setCookie(sAux, qAux, listArray, 1);
     alert("List saved succesfully");
+}
+
+function newList() {
+    
+}
+
+function insertAtStart() {
+    
+}
+
+function insertAt() {
+    let value = document.getElementById("lElement").value;
+    if(value == "") {
+        alert("Please enter the data to insert.");
+        return;
+    }
+    let position = document.getElementById("lPosition").value;
+    if(position == "") {
+        alert("Please enter the posistion to insert at");
+        return;
+    }
+    position = Number(document.getElementById("lPosition").value);
+    if(position < 0 || position >= listArray.length) {
+        alert("Please enter a valid posistion to insert at.");
+        return;
+    }
+    
+    listArray.splice(position, 0, value);
+}
+
+function append() {
+    resetCodeAnimations("lCode");
+    let value = document.getElementById("lElement").value;
+    if(value == "") {
+        alert("Please enter the data to append.");
+        return;
+    }
+    let row;
+    let element = document.createElement("td");
+    let pointer = document.createElement("td");
+    let arrow = document.createElement("td");
+    let nullE = document.createElement("td");
+    let nullIcon = document.createElement("img");
+    nullIcon.src = "../icons/null.svg"
+    nullE.appendChild(nullIcon);
+    nullIcon.style.filter = (document.body.style.color == "rgb(46, 46, 46)")
+            ? "brightness(10%)" : "brightness(100%)";
+    if (!list.hasChildNodes()) {
+        row = document.createElement("tr");
+        list.appendChild(row);
+        let start = document.createElement("td");
+        let startText = document.createTextNode("start");
+        start.appendChild(startText);
+        start.style.color = document.body.style.color;
+        row.appendChild(start);
+        row.appendChild(element);
+        row.appendChild(pointer);
+        row.appendChild(nullE);
+    }
+    else {
+        row = list.firstChild;
+        if (row.hasChildNodes()) {
+            let aux = row.lastChild;
+            row.replaceChild(arrow, aux);
+            let arrowText = document.createTextNode("→");
+            arrow.appendChild(arrowText);
+        }
+        row.appendChild(element);
+        row.appendChild(pointer);
+        row.appendChild(nullE);
+    }
+    element.className = pointer.className = "listElement";
+    let text = document.createTextNode(value);
+    element.appendChild(text);
+    listArray.push(value);
+    codeAnimation("createListNode");
+    codeAnimation("appendCode");
+}
+
+function deleteAtStart() {
+
+}
+
+function deleteAt() {
+
+}
+
+function deleteAtEnd() {
+
 }
 
 
