@@ -352,7 +352,15 @@ function newList() {
 }
 
 function insertAtStart() {
-    
+    let value = document.getElementById("lElement").value;
+    if(value == "") {
+        alert("Please enter the data to append.");
+        return;
+    }
+    resetCodeAnimations("lCode");
+    listArray.splice(0, 0, value);
+    codeAnimation("createListNode");
+    codeAnimation("insertAtStartCode");
 }
 
 function insertAt() {
@@ -367,21 +375,44 @@ function insertAt() {
         return;
     }
     position = Number(document.getElementById("lPosition").value);
-    if(position < 0 || position >= listArray.length) {
+    if(position < 0 || listArray.length == 0 || position >= listArray.length) {
         alert("Please enter a valid posistion to insert at.");
         return;
     }
-    
+    if(position == listArray.length - 1) {
+        append();
+        return;
+    }
+    if(position == 0) {
+        insertAtStart();
+        return;
+    }
+    resetCodeAnimations("lCode");
+    let row = list.firstChild;
+    let element = document.createElement("td");
+    let pointer = document.createElement("td");
+    let arrow = document.createElement("td");
+    let next = row.children.item(position * 3 + 1);
+    let arrowText = document.createTextNode("→");
+    arrow.appendChild(arrowText);
+    row.insertBefore(arrow, next);
+    row.insertBefore(pointer, arrow);
+    row.insertBefore(element, pointer);
+    element.className = pointer.className = "listElement";
+    let text = document.createTextNode(value);
+    element.appendChild(text);
     listArray.splice(position, 0, value);
+    codeAnimation("createListNode");
+    codeAnimation("insertAtCode");
 }
 
 function append() {
-    resetCodeAnimations("lCode");
     let value = document.getElementById("lElement").value;
     if(value == "") {
         alert("Please enter the data to append.");
         return;
     }
+    resetCodeAnimations("lCode");
     let row;
     let element = document.createElement("td");
     let pointer = document.createElement("td");
