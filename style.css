@@ -85,11 +85,18 @@ nav ul li:hover {
   max-height: 65vh;
 }
 
-#sCode::-webkit-scrollbar, #qCode::-webkit-scrollbar, #lCode::-webkit-scrollbar {
-  display: none;
-}
-
-#stack, #queue, #list {
+#sCode::-webkit-scrollbar,
+#qCode::-webkit-scrollbar,
+#lCode::-webkit-scrollbar,
+#qAnimation::-webkit-scrollbar,
+#lAnimation::-webkit-scrollbar,
+#sCode::-webkit-scrollbar,
+#qCode::-webkit-scrollbar,
+#lCode::-webkit-scrollbar,
+#qAnimation::-webkit-scrollbar,
+#lAnimation::-webkit-scrollbar,
+#stack, #queue, #list
+{
   display: none;
 }
 
