@@ -290,6 +290,7 @@ function saveQueue() {
 //List
 
 function loadList() {
+    console.log(listArray);
     resetCodeAnimations("lCode");
     let lArray = getCookie("listArray");
     if (lArray != "") listArray = lArray.split(",");
@@ -298,40 +299,45 @@ function loadList() {
         //Delete any list
         if (list.hasChildNodes()) list.removeChild(list.firstChild);
         //Print the list
-        let row, value, arrow, arrowText, data;
+        let row, value, arrow, arrowText, data, pointer;
         //Se crea la fila (solo habra una)
         row = document.createElement("tr");
-        queue.appendChild(row);
-        for (let i = 0; i < queueArray.length; i++) {
+        list.appendChild(row);
+        for (let i = 0; i < listArray.length; i++) {
             if (i === 0) {
-                let head = document.createElement("td");
-                row.appendChild(head);
-                let headtext = document.createTextNode("head");
-                head.style.color = "#FA5858";
-                head.appendChild(headtext);
+                let start = document.createElement("td");
+                row.appendChild(start);
+                let starttext = document.createTextNode("start");
+                start.style.color = "#A9F5F2";
+                start.appendChild(starttext);
             }
-            value = document.createTextNode(queueArray[i]);
+            value = document.createTextNode(listArray[i]);
             //agregar el nodo (una columna)
             data = document.createElement("td");
-            data.className = "queueElement";
+            data.className = "listElement";
             row.appendChild(data);
             data.appendChild(value);
+            pointer = document.createElement("td");
+            row.appendChild(pointer);
+            pointer.className = "listElement";
             //si i es el ultimo elemento, no se imprime la flecha solo el nodo 
-            if (i != (queueArray.length - 1)) {
-                //Arrow 
+            if (i != (listArray.length - 1)) {
+                //Arrow y pointer
                 arrow = document.createElement("td");
                 row.appendChild(arrow);
                 arrowText = document.createTextNode("→");
                 arrow.appendChild(arrowText);
             } else {
-                let tail = document.createElement("td");
-                let tailText = document.createTextNode("tail");
-                tail.appendChild(tailText);
-                tail.style.color = "#FA5858";
-                row.appendChild(tail);
+                let nullE = document.createElement("td");
+                row.appendChild(nullE);
+                let nullIcon = document.createElement("img");
+                nullIcon.src = "../icons/null.svg"
+                nullE.appendChild(nullIcon);
+                nullIcon.style.filter = (document.body.style.color == "rgb(46, 46, 46)")
+                ? "brightness(10%)" : "brightness(100%)";
             }
         }
-        alert("Queue previously stored loaaded successfully");
+        alert("List previously stored loaaded successfully");
     }
 
 }
@@ -345,10 +351,14 @@ function saveList() {
     if (sArray != "") sAux = sArray.split(",");
     setCookie(sAux, qAux, listArray, 1);
     alert("List saved succesfully");
+    console.log(listArray);
 }
 
 function newList() {
-    
+    resetCodeAnimations("lCode");
+    if (list.hasChildNodes()) list.removeChild(list.firstChild);
+    listArray = new Array();
+    codeAnimation("createList");
 }
 
 function insertAtStart() {
@@ -358,6 +368,42 @@ function insertAtStart() {
         return;
     }
     resetCodeAnimations("lCode");
+    //
+    let row = list.firstChild;
+    let element = document.createElement("td");
+    let pointer = document.createElement("td");
+    let nullE = document.createElement("td");
+    let nullIcon = document.createElement("img");
+    nullIcon.src = "../icons/null.svg"
+    nullE.appendChild(nullIcon);
+    nullIcon.style.filter = (document.body.style.color == "rgb(46, 46, 46)")
+            ? "brightness(10%)" : "brightness(100%)";
+
+    if (!list.hasChildNodes()) {
+        row = document.createElement("tr");
+        list.appendChild(row);
+        let start = document.createElement("td");
+        let startText = document.createTextNode("start");
+        start.appendChild(startText);
+        start.style.color = document.body.style.color;
+        row.appendChild(start);
+        row.appendChild(element);
+        row.appendChild(pointer);
+        row.appendChild(nullE);
+    }
+    else{
+        let arrow = document.createElement("td");
+        let next = row.children.item(1);
+        let arrowText = document.createTextNode("→");
+        arrow.appendChild(arrowText);
+        row.insertBefore(arrow, next);
+        row.insertBefore(pointer, arrow);
+        row.insertBefore(element, pointer);
+    }
+
+    element.className = pointer.className = "listElement";
+    let text = document.createTextNode(value);
+    element.appendChild(text);
     listArray.splice(0, 0, value);
     codeAnimation("createListNode");
     codeAnimation("insertAtStartCode");
@@ -476,7 +522,7 @@ function setCookie(sArray, qArray, lArray, exdays) {
     var expires = "expires=" + d.toUTCString();
     document.cookie = "queueArray=" + qArray.toString() + ";" + expires + ";path=/";
     document.cookie = "stackArray=" + sArray.toString() + ";" + expires + ";path=/";
-    document.cookie = + "listArray=" + lArray.toString() + ";" + expires + ";path=/";
+    document.cookie = "listArray=" + lArray.toString() + ";" + expires + ";path=/";
 }
 
 function getCookie(cname) {
