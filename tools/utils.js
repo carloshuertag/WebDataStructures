@@ -49,8 +49,7 @@ function resetCodeAnimations(sectionId) {
 
 function codeAnimation(articleId) {
     let lines = document.getElementById(articleId).children;
-    let i;
-    for (i = 0; i < lines.length; i++) if(lines.item(i).tagName != "br"){
+    for (let i = 0; i < lines.length; i++) if(lines.item(i).tagName != "br"){
         lines.item(i).style.color = (document.body.style.color == "rgb(46, 46, 46)")
             ? "rgba(0, 127, 63, 0.9)" : "rgba(0, 255, 127, 0.9)";
         lines.item(i).style.backgroundColor = (document.body.style.color == "rgb(46, 46, 46)")
@@ -206,15 +205,13 @@ function enqueue() {
 function dequeue() {
     resetCodeAnimations("qCode");
     if (queue.hasChildNodes()) {
-        let head = document.createElement("td");
-        let headtext = document.createTextNode("head");
-        head.appendChild(headtext);
-        head.style.color = "#FA5858";
-        let row = queue.firstChild;
-        if (row.hasChildNodes()) row.removeChild(row.firstChild);
-        if (row.hasChildNodes()) row.removeChild(row.firstChild);
-        if (row.hasChildNodes()) row.removeChild(row.firstChild);
+        let row = queue.firstChild, i = 3;
+        while(i--) row.removeChild(row.firstChild);
         if (row.hasChildNodes()) {
+            let head = document.createElement("td");
+            let headtext = document.createTextNode("head");
+            head.appendChild(headtext);
+            head.style.color = "#FA5858";
             let aux = row.firstChild;
             row.insertBefore(head, aux);
         } else queue.removeChild(row);
@@ -236,11 +233,8 @@ function loadQueue() {
     if (qArray != "") queueArray = qArray.split(",");
     if (queueArray.length == 0) alert("No queue stored");
     else {
-        //Delete any queue
         if (queue.hasChildNodes()) queue.removeChild(queue.firstChild);
-        //Print the queue
         let row, value, arrow, arrowText, data;
-        //Se crea la fila (solo habra una)
         row = document.createElement("tr");
         queue.appendChild(row);
         for (let i = 0; i < queueArray.length; i++) {
@@ -252,14 +246,11 @@ function loadQueue() {
                 head.appendChild(headtext);
             }
             value = document.createTextNode(queueArray[i]);
-            //agregar el nodo (una columna)
             data = document.createElement("td");
             data.className = "queueElement";
             row.appendChild(data);
             data.appendChild(value);
-            //si i es el ultimo elemento, no se imprime la flecha solo el nodo 
             if (i != (queueArray.length - 1)) {
-                //Arrow 
                 arrow = document.createElement("td");
                 row.appendChild(arrow);
                 arrowText = document.createTextNode("→");
@@ -290,17 +281,13 @@ function saveQueue() {
 //List
 
 function loadList() {
-    console.log(listArray);
     resetCodeAnimations("lCode");
     let lArray = getCookie("listArray");
     if (lArray != "") listArray = lArray.split(",");
     if (listArray.length == 0) alert("No list stored");
     else {
-        //Delete any list
         if (list.hasChildNodes()) list.removeChild(list.firstChild);
-        //Print the list
         let row, value, arrow, arrowText, data, pointer;
-        //Se crea la fila (solo habra una)
         row = document.createElement("tr");
         list.appendChild(row);
         for (let i = 0; i < listArray.length; i++) {
@@ -312,7 +299,6 @@ function loadList() {
                 start.appendChild(starttext);
             }
             value = document.createTextNode(listArray[i]);
-            //agregar el nodo (una columna)
             data = document.createElement("td");
             data.className = "listElement";
             row.appendChild(data);
@@ -320,9 +306,7 @@ function loadList() {
             pointer = document.createElement("td");
             row.appendChild(pointer);
             pointer.className = "listElement";
-            //si i es el ultimo elemento, no se imprime la flecha solo el nodo 
             if (i != (listArray.length - 1)) {
-                //Arrow y pointer
                 arrow = document.createElement("td");
                 row.appendChild(arrow);
                 arrowText = document.createTextNode("→");
@@ -351,7 +335,6 @@ function saveList() {
     if (sArray != "") sAux = sArray.split(",");
     setCookie(sAux, qAux, listArray, 1);
     alert("List saved succesfully");
-    console.log(listArray);
 }
 
 function newList() {
@@ -368,8 +351,7 @@ function insertAtStart() {
         return;
     }
     resetCodeAnimations("lCode");
-    //
-    let row = list.firstChild;
+    let row;
     let element = document.createElement("td");
     let pointer = document.createElement("td");
     let nullE = document.createElement("td");
@@ -378,7 +360,6 @@ function insertAtStart() {
     nullE.appendChild(nullIcon);
     nullIcon.style.filter = (document.body.style.color == "rgb(46, 46, 46)")
             ? "brightness(10%)" : "brightness(100%)";
-
     if (!list.hasChildNodes()) {
         row = document.createElement("tr");
         list.appendChild(row);
@@ -392,6 +373,7 @@ function insertAtStart() {
         row.appendChild(nullE);
     }
     else{
+        row = list.firstChild;
         let arrow = document.createElement("td");
         let next = row.children.item(1);
         let arrowText = document.createTextNode("→");
@@ -400,7 +382,6 @@ function insertAtStart() {
         row.insertBefore(pointer, arrow);
         row.insertBefore(element, pointer);
     }
-
     element.className = pointer.className = "listElement";
     let text = document.createTextNode(value);
     element.appendChild(text);
@@ -423,10 +404,6 @@ function insertAt() {
     position = Number(document.getElementById("lPosition").value);
     if(position < 0 || listArray.length == 0 || position >= listArray.length) {
         alert("Please enter a valid posistion to insert at.");
-        return;
-    }
-    if(position == listArray.length - 1) {
-        append();
         return;
     }
     if(position == 0) {
@@ -502,15 +479,62 @@ function append() {
 }
 
 function deleteAtStart() {
-
+    resetCodeAnimations("lCode");
+    if (list.hasChildNodes()) {
+        let row = list.firstChild, i = 4;
+        while(i--) if (row.hasChildNodes()) row.removeChild(row.firstChild);
+        if (row.hasChildNodes()) {
+            let start = document.createElement("td");
+            let starttext = document.createTextNode("start");
+            start.appendChild(starttext);
+            start.style.color = document.body.style.color;
+            let aux = row.firstChild;
+            row.insertBefore(start, aux);
+        }
+    }
+    listArray.shift();
+    codeAnimation("deleteAtStartCode");
 }
 
 function deleteAt() {
-
+    resetCodeAnimations("lCode");
+    let position = document.getElementById("lPosition").value;
+    if(position == "") {
+        alert("Please enter the posistion to insert at");
+        return;
+    }
+    position = Number(document.getElementById("lPosition").value);
+    if(position < 0 || listArray.length == 0 || position >= listArray.length) {
+        alert("Please enter a valid posistion to insert at.");
+        return;
+    }
+    if(position == 0) {
+        deleteAtStart();
+        return;
+    }
+    if(position == (listArray.length - 1)) {
+        deleteAtEnd();
+        return;
+    }
+    if(list.hasChildNodes()) {
+        let row = list.firstChild;
+        let i = 0, index = position * 3;
+        while(i++ < 3) row.removeChild(row.children.item(index));
+    }
+    listArray.splice(position, 1);
+    codeAnimation("deleteAtCode");
 }
 
 function deleteAtEnd() {
-
+    resetCodeAnimations("lCode");
+    if(list.hasChildNodes()) {
+        let row = list.firstChild;
+        let i = 0, index = (listArray.length - 1) * 3;
+        while(i++ < 3) row.removeChild(row.children.item(index));
+        if (row.children.length == 1) row.removeChild(row.children.item(0));
+    }
+    listArray.pop();
+    codeAnimation("deleteAtEndCode");
 }
 
 
